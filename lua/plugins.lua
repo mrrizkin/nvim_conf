@@ -35,7 +35,7 @@ return packer.startup(function()
         config = function()
             local nvim_lsp = require("lspconfig")
 
-            local function on_attach(_, bufnr)
+            local function on_attach(client, bufnr)
                 local function buf_set_keymap(...)
                     vim.api.nvim_buf_set_keymap(bufnr, ...)
                 end
@@ -70,12 +70,19 @@ return packer.startup(function()
                 buf_set_keymap('n', '<leader>q',  [[<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>]], opts)
                 buf_set_keymap('n', '<leader>so', [[<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>]], opts)
                 vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
+
+                if client.resolved_capabilities.document_formatting then
+                    vim.api.nvim_command([[augroup Formatter]])
+                    vim.api.nvim_command([[autocmd! * <buffer>]])
+                    vim.api.nvim_command([[autocmd BufWritePre lua vim.lsp.buf.formatting_seq_sync(nil, 500)]])
+                    vim.api.nvim_command([[augroup END]])
+                end
             end
 
             local capabilities = vim.lsp.protocol.make_client_capabilities()
             capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-            local servers = { 'bashls', 'cssls', 'elmls', 'tsserver', 'rust_analyzer' }
+            local servers = { 'bashls', 'html', 'cssls', 'elmls', 'tsserver', 'rust_analyzer' }
             for _, lsp in ipairs(servers) do
                 nvim_lsp[lsp].setup {
                     on_attach = on_attach,
