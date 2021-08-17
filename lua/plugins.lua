@@ -31,11 +31,11 @@ return packer.startup(function()
 
     use({
         "neovim/nvim-lspconfig",
+        requires = { "glepnir/lspsaga.nvim" },
         config = function()
-            local lspconfig = require("lspconfig")
-            local capabilities = vim.lsp.protocol.make_client_capabilities()
-            capabilities.textDocument.completion.completionItem.snippetSupport = true
-            local function on_attach(client, bufnr)
+            local nvim_lsp = require("lspconfig")
+
+            local function on_attach(_, bufnr)
                 local function buf_set_keymap(...)
                     vim.api.nvim_buf_set_keymap(bufnr, ...)
                 end
@@ -48,80 +48,106 @@ return packer.startup(function()
 
                 -- Mappings.
                 local opts = { noremap = true, silent = true }
-
-                buf_set_keymap("n", "gD", "<Cmd>lua vim.lsp.buf.declaration()<CR>", opts)
-
-                -- GoTo code navigation
-                buf_set_keymap("n", "gd", "<Cmd>lua vim.lsp.buf.definition()<CR>", opts)
-                buf_set_keymap(
-                "n",
-                "gy",
-                "<cmd>lua vim.lsp.buf.type_definition()<CR>",
-                opts
-                )
-                buf_set_keymap("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
-                buf_set_keymap("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
+                buf_set_keymap('n', 'gD',         [[<Cmd>lua vim.lsp.buf.declaration()<CR>]], opts)
+                buf_set_keymap('n', 'gd',         [[<Cmd>lua vim.lsp.buf.definition()<CR>]], opts)
+                buf_set_keymap('n', 'K',          [[<Cmd>Lspsaga hover_doc<CR>]], opts)
+                buf_set_keymap('n', '<C-f>',      [[<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>]], opts)
+                buf_set_keymap('n', '<C-b>',      [[<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>]], opts)
+                buf_set_keymap('n', 'gi',         [[<cmd>lua vim.lsp.buf.implementation()<CR>]], opts)
+                buf_set_keymap('i', '<C-k>',      [[<cmd>Lspsaga signature_help<CR>]], opts)
+                buf_set_keymap('n', '<C-k>',      [[<cmd>Lspsaga signature_help<CR>]], opts)
+                buf_set_keymap('n', '<leader>wa', [[<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>]], opts)
+                buf_set_keymap('n', '<leader>wr', [[<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>]], opts)
+                buf_set_keymap('n', '<leader>wl', [[<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>]], opts)
+                buf_set_keymap('n', '<leader>D',  [[<cmd>lua vim.lsp.buf.type_definition()<CR>]], opts)
+                buf_set_keymap('n', '<leader>rn', [[<cmd>Lspsaga rename<CR>]], opts)
+                buf_set_keymap('n', 'gr',         [[<cmd>lua vim.lsp.buf.references()<CR>]], opts)
+                buf_set_keymap('n', '<leader>ca', [[<cmd>Lspsaga code_action<CR>]], opts)
+                buf_set_keymap('v', '<leader>ca', [[<cmd><C-U>Lspsaga range_code_action<CR>]], opts)
+                buf_set_keymap('n', '<leader>ld', [[<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>]], opts)
+                buf_set_keymap('n', '[d',         [[<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>]], opts)
+                buf_set_keymap('n', ']d',         [[<cmd>lua vim.lsp.diagnostic.goto_next()<CR>]], opts)
+                buf_set_keymap('n', '<leader>q',  [[<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>]], opts)
+                buf_set_keymap('n', '<leader>so', [[<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>]], opts)
+                vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
             end
-            lspconfig.bashls.setup({
-                on_attach = on_attach,
-                flags = { debounce_text_changes = 150 },
-            })
 
-            lspconfig.cssls.setup({
-                capabilities = capabilities,
-                on_attach = on_attach,
-                flags = { debounce_text_changes = 150 },
-            })
+            local capabilities = vim.lsp.protocol.make_client_capabilities()
+            capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-            lspconfig.elmls.setup({
-                on_attach = function(client, bufnr)
-                    client.resolved_capabilities.document_formatting = false
-                    on_attach(client, bufnr)
-                end,
-                flags = { debounce_text_changes = 150 },
-            })
+            local servers = { 'bashls', 'cssls', 'elmls', 'tsserver', 'rust_analyzer' }
+            for _, lsp in ipairs(servers) do
+                nvim_lsp[lsp].setup {
+                    on_attach = on_attach,
+                    capabilities = capabilities,
+                    flags = { debounce_text_changes = 150 },
+                }
+            end
 
-            lspconfig.sumneko_lua.setup({
+            local runtime_path = vim.split(package.path, ';')
+            table.insert(runtime_path, 'lua/?.lua')
+            table.insert(runtime_path, 'lua/?/init.lua')
+
+            nvim_lsp.sumneko_lua.setup({
                 cmd = { "lua-language-server" },
+                on_attach = on_attach,
+                capabilities = capabilities,
                 root_dir = vim.loop.cwd,
+                flags = { debounce_text_changes = 150 },
                 settings = {
                     Lua = {
                         runtime = {
                             version = "LuaJIT",
-                            path = vim.split(package.path, ";"),
+                            path = runtime_path,
                         },
                         diagnostics = { globals = { "vim" } },
                         workspace = {
-                            library = {
-                                [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-                                [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
-                            },
+                            library = vim.api.nvim_get_runtime_file('', true),
                             maxPreload = 100000,
                             preloadFileSize = 10000,
                         },
                         telemetry = { enable = false },
                     },
                 },
-                on_attach = function(client, bufnr)
-                    client.resolved_capabilities.document_formatting = false
-                    on_attach(client, bufnr)
-                end,
-                flags = { debounce_text_changes = 150 },
-            })
-
-            lspconfig.tsserver.setup({
-                on_attach = function(client, bufnr)
-                    client.resolved_capabilities.document_formatting = false
-                    on_attach(client, bufnr)
-                end,
-                flags = { debounce_text_changes = 150 },
-            })
-
-            lspconfig.rust_analyzer.setup({
-                on_attach = on_attach,
-                flags = { debounce_text_changes = 150 },
             })
         end,
+    })
+
+    use({
+        'glepnir/lspsaga.nvim',
+        config = function()
+            local saga = require("lspsaga")
+            saga.init_lsp_saga({
+                use_saga_diagnostic_sign = true,
+                error_sign = 'E',
+                warn_sign = 'W',
+                hint_sign = 'H',
+                infor_sign = 'I',
+                dianostic_header_icon = '   ',
+                code_action_icon = ' ',
+                code_action_prompt = {
+                    enable = true,
+                    sign = false,
+                    sign_priority = 20,
+                    virtual_text = true,
+                },
+                finder_definition_icon = '  ',
+                finder_reference_icon = '  ',
+                max_preview_lines = 10, -- preview lines of lsp_finder and definition preview
+                finder_action_keys = {
+                    open = 'o', vsplit = 's',split = 'i',quit = 'q',scroll_down = '<C-f>', scroll_up = '<C-b>' -- quit can be a table
+                },
+                code_action_keys = {
+                    quit = 'q',exec = '<CR>'
+                },
+                rename_action_keys = {
+                    quit = '<C-c>',exec = '<CR>'  -- quit can be a table
+                },
+                definition_preview_icon = '  ',
+                border_style = "round",
+                rename_prompt_prefix = '➤',
+            })
+        end
     })
 
     use({ "nvim-telescope/telescope.nvim" })
@@ -135,7 +161,15 @@ return packer.startup(function()
         requires = "plenary.nvim",
         event = "BufRead",
         config = function()
-            require("gitsigns").setup()
+            require("gitsigns").setup({
+                signs = {
+                    add = { text = '+' },
+                    change = { text = '~' },
+                    delete = { text = '_' },
+                    topdelete = { text = '‾' },
+                    changedelete = { text = '~' },
+                },
+            })
         end,
     })
 
