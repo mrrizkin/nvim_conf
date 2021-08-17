@@ -7,6 +7,7 @@ local autocmd = utils.autocmd
 local map = utils.map
 
 -- Leader/local leader
+map('', '<Space>', '<Nop>', { silent = true })
 g.mapleader = [[ ]]
 g.maplocalleader = [[,]]
 
@@ -41,6 +42,7 @@ for _, plugin in pairs(disabled_built_ins) do
     g["loaded_" .. plugin] = 1
 end
 -- }}}
+
 -- Settings {{{
 local buffer = { o, bo }
 local window = { o, wo }
@@ -80,6 +82,7 @@ opt("shortmess", o.shortmess .. "csI")
 opt("wildignore", "*/node_modules/*,*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite")
 -- }}}
 
+-- Commands {{{
 cmd [[colorscheme everbush]]
 
 cmd [[cnoreabbrev W! w!]]
@@ -109,6 +112,7 @@ autocmd("dirvish_config", {
     [[FileType dirvish nnoremap <silent><buffer> gh :silent keeppatterns g@\v/\.[^\/]+/?$@d _<cr>:setl cole=3<cr>]],
     [[BufEnter * if (winnr("$") == 1 && &filetype == 'dirvish') | q | endif]]
 }, true)
+-- }}}
 
 -- -- FIX: Neovim not allowed this {{{
 -- _G.dirvish_toggle = function()
@@ -136,12 +140,20 @@ autocmd("dirvish_config", {
 -- Keybindings {{{
 local silent = { silent = true }
 
+map("n", "<F1>", "<cmd>FloatermToggle<cr>", silent)
+map("n", "<leader>f", "<cmd>Telescope find_files<cr>", silent)
+
 map("n", "<leader>e", "<cmd>Vexplore<cr>", silent)
 
+-- Moving bitween windows with ease
 map("n", "<c-h>", "<c-w>h", silent)
 map("n", "<c-j>", "<c-w>j", silent)
 map("n", "<c-k>", "<c-w>k", silent)
 map("n", "<c-l>", "<c-w>l", silent)
+
+-- Trigger completion with Ctrl + space
+map("i", "<C-space>", "<C-x><C-o>", silent)
+map("n", "<C-space>", "<C-x><C-o>", silent)
 
 map("v", "<", "<gv", silent)
 map("v", ">", ">gv", silent)
