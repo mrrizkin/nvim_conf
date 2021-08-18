@@ -71,11 +71,17 @@ return packer.startup(function()
                 buf_set_keymap('n', '<leader>so', [[<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>]], opts)
                 vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
 
+                -- local utils = require("utils")
+                -- local autocmd = utils.autocmd
+
                 if client.resolved_capabilities.document_formatting then
                     vim.api.nvim_command([[augroup Formatter]])
                     vim.api.nvim_command([[autocmd! * <buffer>]])
-                    vim.api.nvim_command([[autocmd BufWritePre lua vim.lsp.buf.formatting_seq_sync(nil, 500)]])
+                    vim.api.nvim_command([[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()]])
                     vim.api.nvim_command([[augroup END]])
+                    -- autocmd("Formatter", {
+                    --     [[BufWritePre * lua vim.lsp.buf.formatting_seq_sync()]]
+                    -- }, true)
                 end
             end
 
