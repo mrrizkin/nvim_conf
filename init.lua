@@ -184,6 +184,8 @@ map("n", "<C-space>", "<C-x><C-o>", silent)
 
 map("v", "<", "<gv", silent)
 map("v", ">", ">gv", silent)
+
+map("n", "<A-f>", ":fin ")
 -- }}}
 
 -- vim: set foldmethod=marker:
