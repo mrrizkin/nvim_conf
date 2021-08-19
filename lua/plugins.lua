@@ -14,7 +14,7 @@ local use = packer.use
 return packer.startup(function()
     use({ "nvim-lua/plenary.nvim", module = "plenary", opt = true })
 
-    use({ "nvim-lua/popup.nvim", after = "plenary.nvim", module = "popup", opt = true, })
+    use({ "nvim-lua/popup.nvim", module = "popup", requires = { "nvim-lua/plenary.nvim" }, opt = true, })
 
     use({
         "nvim-treesitter/nvim-treesitter",
@@ -25,6 +25,7 @@ return packer.startup(function()
             require("nvim-treesitter.configs").setup({
                 ensure_installed = { "bash", "lua" },
                 highlight = { enable = true, use_languagetree = true },
+                indent = { enable = true },
             })
         end,
     })
@@ -46,7 +47,7 @@ return packer.startup(function()
         end
     })
 
-    use({ "nvim-telescope/telescope.nvim" })
+    use({ "nvim-telescope/telescope.nvim", event = "BufRead" })
 
     use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make", cmd = "Telescope", })
 
