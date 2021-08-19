@@ -38,6 +38,16 @@ return packer.startup(function()
         end,
     })
 
+    -- she said it's fast as fuck
+    use({
+        'ms-jpq/coq_nvim',
+        branch = 'coq',
+        config = function()
+            vim.g.coq_settings = { auto_start= true }
+        end
+    }) -- main one
+    use({ 'ms-jpq/coq.artifacts', branch= 'artifacts'}) -- 9000+ Snippets
+
     use({
         'glepnir/lspsaga.nvim',
         event = "BufRead",
