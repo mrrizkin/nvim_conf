@@ -116,6 +116,7 @@ autocmd("dirvish_config", {
     [[FileType dirvish setlocal nonu nornu stl=%F]],
     [[FileType dirvish nnoremap <silent><buffer> <C-r> :<C-U>Dirvish %<CR>]],
     [[FileType dirvish nnoremap <silent><buffer> gh :silent keeppatterns g@\v/\.[^\/]+/?$@d _<cr>:setl cole=3<cr>]],
+    [[FileType dirvish nnoremap <silent><buffer> t ddO<Esc><cmd>let @"=substitute(@", '\n', '', 'g')<CR>:r ! find "<C-R>"" -maxdepth 1 -print0 \| xargs -0 ls -Fd<CR>:silent! keeppatterns %s/\/\//\//g<CR>:silent! keeppatterns %s/[^a-zA-Z0-9\/]$//g<CR>:silent! keeppatterns g/^$/d<CR>:noh<CR>]],
     [[BufEnter * if (winnr("$") == 1 && &filetype == 'dirvish') | q | endif]]
 }, true)
 -- }}}
