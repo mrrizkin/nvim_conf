@@ -121,29 +121,6 @@ autocmd("dirvish_config", {
 }, true)
 -- }}}
 
--- -- FIX: Neovim not allowed this {{{
--- _G.dirvish_toggle = function()
---     local last_buffer = vim.fn.bufnr("$")
---     local i = 1
---     local dirvish_already_open = false
-
---     while(i <= last_buffer) do
---         if vim.fn.bufexists(i) and vim.fn.bufloaded(i) and vim.fn.getbufvar(i, "&filetype") == "dirvish" then
---             dirvish_already_open = true
---             vim.fn.execute(":" .. i .. "bd!")
---             return
---         end
---         i = i + 1
---     end
-
---     if not dirvish_already_open then
---         cmd [[Vexplore]]
---         return
---     end
--- end
--- map("n", "<leader>e", "v:lua.dirvish_toggle()", { silent = true, expr = true })
--- }}}
-
 -- Global function {{{
 local hidden_all = 1
 _G.toggleHiddenAll = function()
@@ -168,8 +145,6 @@ local silent = { silent = true }
 
 map("n", "<F1>", "<cmd>FloatermToggle<cr>", silent)
 map("n", "<leader>f", "<cmd>Telescope find_files<cr>", silent)
-
-map("n", "<leader>e", "<cmd>Vexplore<cr>", silent)
 
 map("n", "<leader>h", "v:lua.toggleHiddenAll()", { silent = true, expr = true })
 
