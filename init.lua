@@ -121,32 +121,11 @@ autocmd("dirvish_config", {
 }, true)
 -- }}}
 
--- Global function {{{
-local hidden_all = 1
-_G.toggleHiddenAll = function()
-    if hidden_all  == 0 then
-        hidden_all = 1
-        opt("showmode", true)
-        opt("ruler", true)
-        opt("showcmd", true)
-        opt("laststatus", 0)
-    else
-        hidden_all = 0
-        opt("laststatus", 2)
-        opt("showmode", false)
-        opt("ruler", false)
-        opt("showcmd", false)
-    end
-end
--- }}}
-
 -- Keybindings {{{
 local silent = { silent = true }
 
 map("n", "<F1>", "<cmd>FloatermToggle<cr>", silent)
 map("n", "<leader>f", "<cmd>Telescope find_files<cr>", silent)
-
-map("n", "<leader>h", "v:lua.toggleHiddenAll()", { silent = true, expr = true })
 
 -- Moving bitween windows with ease
 map("n", "<c-h>", "<c-w>h", silent)
