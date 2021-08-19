@@ -43,7 +43,9 @@ return packer.startup(function()
         'ms-jpq/coq_nvim',
         branch = 'coq',
         config = function()
-            vim.g.coq_settings = { auto_start= true }
+            vim.g.coq_settings = {
+                auto_start= "shut-up",
+            }
         end
     }) -- main one
     use({ 'ms-jpq/coq.artifacts', branch= 'artifacts'}) -- 9000+ Snippets
