@@ -65,12 +65,12 @@ opt("number", true, window)
 opt("relativenumber", true, window)
 opt("numberwidth", 4, window)
 opt("signcolumn", "yes:1", window)
-opt("laststatus", 2)
+opt("laststatus", 1)
 opt("completeopt", "menuone,noselect")
 opt("clipboard", o.clipboard .. "unnamedplus")
-opt("showmode", false)
-opt("showcmd", false)
-opt("ruler", false)
+opt("showmode", true)
+opt("showcmd", true)
+opt("ruler", true)
 opt("hidden", true)
 opt("swapfile", false, buffer)
 opt("writebackup", false)
@@ -137,6 +137,25 @@ autocmd("dirvish_config", {
 -- map("n", "<leader>e", "v:lua.dirvish_toggle()", { silent = true, expr = true })
 -- }}}
 
+-- Global function {{{
+local hidden_all = 1
+_G.toggleHiddenAll = function()
+    if hidden_all  == 0 then
+        hidden_all = 1
+        opt("showmode", true)
+        opt("ruler", true)
+        opt("showcmd", true)
+        opt("laststatus", 0)
+    else
+        hidden_all = 0
+        opt("laststatus", 2)
+        opt("showmode", false)
+        opt("ruler", false)
+        opt("showcmd", false)
+    end
+end
+-- }}}
+
 -- Keybindings {{{
 local silent = { silent = true }
 
@@ -144,6 +163,8 @@ map("n", "<F1>", "<cmd>FloatermToggle<cr>", silent)
 map("n", "<leader>f", "<cmd>Telescope find_files<cr>", silent)
 
 map("n", "<leader>e", "<cmd>Vexplore<cr>", silent)
+
+map("n", "<leader>h", "v:lua.toggleHiddenAll()", { silent = true, expr = true })
 
 -- Moving bitween windows with ease
 map("n", "<c-h>", "<c-w>h", silent)
