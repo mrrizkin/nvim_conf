@@ -11,32 +11,37 @@ map('', '<Space>', '<Nop>', { silent = true })
 g.mapleader = [[ ]]
 g.maplocalleader = [[,]]
 
--- Skip some remote provider loading
+-- Skip some remote provider loading {{{
 g.loaded_python_provider = 0
 g.python_host_prog = "/usr/bin/python2"
 g.python3_host_prog = "/usr/bin/python"
 g.node_host_prog = "/home/wright/.local/share/npm/bin/neovim-node-host"
+-- }}}
 
 -- Disable built-in plugins {{{
 local disabled_built_ins = {
-    "netrw",
-    "netrwPlugin",
-    "netrwSettings",
-    "netrwFileHandlers",
-    "gzip",
-    "zip",
-    "zipPlugin",
-    "tar",
-    "tarPlugin",
+    "2html_plugin",
     "getscript",
     "getscriptPlugin",
+    "gzip",
+    "logipat",
+    "matchit",
+    "matchparen",
+    "netrw",
+    "netrwFileHandlers",
+    "netrwPlugin",
+    "netrwSettings",
+    "remote_plugins",
+    "rrhelper",
+    "shada_plugin",
+    "spellfile_plugin",
+    "tar",
+    "tarPlugin",
+    "tutor_mode_plugin",
     "vimball",
     "vimballPlugin",
-    "2html_plugin",
-    "logipat",
-    "rrhelper",
-    "spellfile_plugin",
-    "matchit",
+    "zip",
+    "zipPlugin",
 }
 for _, plugin in pairs(disabled_built_ins) do
     g["loaded_" .. plugin] = 1
@@ -49,6 +54,7 @@ local window = { o, wo }
 opt("mouse", "nivh")
 opt("background", "dark")
 opt("undofile", true, buffer)
+opt("synmaxcol", 200, buffer)
 opt("lazyredraw", true)
 opt("showmatch", true)
 opt("incsearch", true)
