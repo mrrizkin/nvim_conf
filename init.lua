@@ -11,14 +11,13 @@ map('', '<Space>', '<Nop>', { silent = true })
 g.mapleader = [[ ]]
 g.maplocalleader = [[,]]
 
--- Skip some remote provider loading {{{
+-- Skip some remote provider loading
 g.loaded_python_provider = 0
 g.python_host_prog = "/usr/bin/python2"
 g.python3_host_prog = "/usr/bin/python"
 g.node_host_prog = "/home/wright/.local/share/npm/bin/neovim-node-host"
--- }}}
 
--- Disable built-in plugins {{{
+-- Disable built-in plugins
 local disabled_built_ins = {
     "2html_plugin",
     "getscript",
@@ -46,9 +45,8 @@ local disabled_built_ins = {
 for _, plugin in pairs(disabled_built_ins) do
     g["loaded_" .. plugin] = 1
 end
--- }}}
 
--- Settings {{{
+-- Settings
 local buffer = { o, bo }
 local window = { o, wo }
 opt("mouse", "nivh")
@@ -71,7 +69,7 @@ opt("number", true, window)
 opt("relativenumber", true, window)
 opt("numberwidth", 4, window)
 opt("signcolumn", "yes:1", window)
-opt("laststatus", 1)
+opt("laststatus", 2)
 opt("completeopt", "menuone,noselect")
 opt("clipboard", o.clipboard .. "unnamedplus")
 opt("showmode", true)
@@ -82,13 +80,11 @@ opt("swapfile", false, buffer)
 opt("writebackup", false)
 opt("termguicolors", true)
 opt("updatetime", 500)
-opt("modeline", true, buffer)
-opt("modelines", 5)
+opt("modeline", false, buffer)
 opt("shortmess", o.shortmess .. "csI")
 opt("wildignore", "*/node_modules/*,*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite")
--- }}}
 
--- Commands {{{
+-- Commands
 cmd [[colorscheme everbush]]
 
 cmd [[cnoreabbrev W! w!]]
@@ -119,9 +115,8 @@ autocmd("dirvish_config", {
     [[FileType dirvish nnoremap <silent><buffer> t ddO<Esc><cmd>let @"=substitute(@", '\n', '', 'g')<CR>:r ! find "<C-R>"" -maxdepth 1 -print0 \| xargs -0 ls -Fd<CR>:silent! keeppatterns %s/\/\//\//g<CR>:silent! keeppatterns %s/[^a-zA-Z0-9\/]$//g<CR>:silent! keeppatterns g/^$/d<CR>:noh<CR>]],
     [[BufEnter * if (winnr("$") == 1 && &filetype == 'dirvish') | q | endif]]
 }, true)
--- }}}
 
--- Keybindings {{{
+-- Keybindings
 local silent = { silent = true }
 
 map("n", "<F1>", "<cmd>FloatermToggle<cr>", silent)
@@ -141,6 +136,3 @@ map("v", "<", "<gv", silent)
 map("v", ">", ">gv", silent)
 
 map("n", "<A-f>", ":fin ")
--- }}}
-
--- vim: set foldmethod=marker:
