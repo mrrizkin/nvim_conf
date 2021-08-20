@@ -122,7 +122,7 @@ return packer.startup(function()
 
     use({
         "voldikss/vim-floaterm",
-        cmd = "FloatermToggle",
+        cmd = { "FloatermToggle", "FloatermNew", "FloatermSend" },
         config = function()
             vim.g.floaterm_keymap_toggle = "<F1>"
             vim.g.floaterm_gitcommit = "floaterm"
