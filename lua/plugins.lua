@@ -62,10 +62,32 @@ return packer.startup(function()
         end
     })
 
-    use({ "nvim-telescope/telescope.nvim", event = "BufRead" })
     use({
         "nvim-telescope/telescope.nvim",
         event = "BufRead",
+        config = function()
+            require("telescope").setup({
+                pickers = {
+                    buffers = {
+                        sort_lastused = true,
+                        theme = "dropdown",
+                        previewer = false,
+                        mappings = {
+                            i = {
+                                ["<c-d>"] = require("telescope.actions").delete_buffer,
+                            },
+                            n = {
+                                ["<c-d>"] = require("telescope.actions").delete_buffer,
+                            }
+                        }
+                    },
+                    find_files = {
+                        theme = "dropdown",
+                        previewer = false,
+                    }
+                },
+            })
+        end
     })
 
     use({
