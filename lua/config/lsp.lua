@@ -48,7 +48,7 @@ end
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-local servers = { 'bashls', 'html', 'cssls', 'elmls', 'tsserver', 'rust_analyzer' }
+local servers = { 'bashls', 'html', 'cssls', 'vimls', 'elmls', 'tsserver', 'rust_analyzer' }
 for _, lsp in ipairs(servers) do
     nvim_lsp[lsp].setup(
         require("coq")().lsp_ensure_capabilities({
