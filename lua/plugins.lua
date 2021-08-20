@@ -89,6 +89,8 @@ return packer.startup(function()
 
     use({ "vimwiki/vimwiki", ft = { "vimwiki", "markdown" } })
 
+    use({ "tools-life/taskwiki", ft = { "vimwiki", "markdown" } })
+
     use({
         "terrortylor/nvim-comment",
         config = function()
