@@ -44,7 +44,7 @@ return packer.startup(function()
         branch = 'coq',
         config = function()
             vim.g.coq_settings = {
-                auto_start= "shut-up",
+                auto_start = "shut-up",
                 keymap = {
                     jump_to_mark = "<A-h>"
                 }
@@ -63,10 +63,21 @@ return packer.startup(function()
     })
 
     use({ "nvim-telescope/telescope.nvim", event = "BufRead" })
+    use({
+        "nvim-telescope/telescope.nvim",
+        event = "BufRead",
+    })
 
-    use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make", cmd = "Telescope", })
+    use({
+        "nvim-telescope/telescope-fzf-native.nvim",
+        run = "make",
+        cmd = "Telescope",
+    })
 
-    use({ "nvim-telescope/telescope-media-files.nvim", cmd = "Telescope" })
+    use({
+        "nvim-telescope/telescope-media-files.nvim",
+        cmd = "Telescope"
+    })
 
     use({
         "lewis6991/gitsigns.nvim",
