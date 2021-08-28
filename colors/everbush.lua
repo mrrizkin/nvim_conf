@@ -1,3 +1,4 @@
+-- FIX: slow startuptime
 local fn = vim.fn
 local g = vim.g
 local cmd = vim.api.nvim_command
@@ -121,6 +122,8 @@ local PredefinedColors = {
     InfoFloat    = { fg = colors.blue,   bg = colors.bg4 },
     HintFloat    = { fg = colors.green,  bg = colors.bg4 },
     CurrentWord  = { fg = colors.none,   bg = colors.bg4 }, -- nondiff
+    BG0          = { fg = colors.none,   bg = colors.bg0 },
+    FBG0         = { fg = colors.bg0,    bg = colors.bg0 },
     ErrorLine    = 0,
     WarningLine  = 0,
     InfoLine     = 0,
