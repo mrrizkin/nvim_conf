@@ -53,6 +53,7 @@ opt("mouse", "nivh")
 opt("background", "dark")
 opt("undofile", true, buffer)
 opt("synmaxcol", 200, buffer)
+opt("confirm", true)
 opt("lazyredraw", true)
 opt("showmatch", true)
 opt("incsearch", true)
@@ -61,14 +62,15 @@ opt("smartcase", true)
 opt("expandtab", true, buffer)
 opt("smarttab", true)
 opt("smartindent", true, buffer)
-opt("tabstop", 4, buffer)
-opt("softtabstop", 4, buffer)
-opt("shiftwidth", 4, buffer)
+opt("tabstop", 2, buffer)
+opt("softtabstop", 2, buffer)
+opt("shiftwidth", 2, buffer)
 opt("splitbelow", true)
 opt("number", true, window)
+opt("cursorline", true, window)
 opt("relativenumber", true, window)
 opt("numberwidth", 4, window)
-opt("signcolumn", "yes:1", window)
+opt("signcolumn", "auto:1", window)
 opt("laststatus", 2)
 opt("completeopt", "menuone,noselect")
 opt("clipboard", o.clipboard .. "unnamedplus")
@@ -106,20 +108,24 @@ cmd [[command! PackerCompile packadd packer.nvim | lua require('plugins').compil
 
 cmd [[command! -nargs=? -complete=dir Explore Dirvish <args>]]
 cmd [[command! -nargs=? -complete=dir Sexplore belowright split | silent Dirvish <args>]]
-cmd [[command! -nargs=? -complete=dir Vexplore leftabove 30vsplit | silent Dirvish <args>]]
+cmd [[command! -nargs=? -complete=dir Vexplore leftabove vsplit | silent Dirvish <args>]]
 
 autocmd("dirvish_config", {
-    [[FileType dirvish setlocal nonu nornu stl=%F]],
-    [[FileType dirvish nnoremap <silent><buffer> <C-r> :<C-U>Dirvish %<CR>]],
-    [[FileType dirvish nnoremap <silent><buffer> gh :silent keeppatterns g@\v/\.[^\/]+/?$@d _<cr>:setl cole=3<cr>]],
-    [[FileType dirvish nnoremap <silent><buffer> t ddO<Esc><cmd>let @"=substitute(@", '\n', '', 'g')<CR>:r ! find "<C-R>"" -maxdepth 1 -print0 \| xargs -0 ls -Fd<CR>:silent! keeppatterns %s/\/\//\//g<CR>:silent! keeppatterns %s/[^a-zA-Z0-9\/]$//g<CR>:silent! keeppatterns g/^$/d<CR>:noh<CR>]],
-    [[BufEnter * if (winnr("$") == 1 && &filetype == 'dirvish') | q | endif]]
+  [[FileType dirvish setlocal nonu nornu stl=%F]],
+  [[FileType dirvish nnoremap <silent><buffer> <C-r> :<C-U>Dirvish %<CR>]],
+  [[FileType dirvish nnoremap <silent><buffer> gh :silent keeppatterns g@\v/\.[^\/]+/?$@d _<cr>:setl cole=3<cr>]],
 }, true)
 
 -- Keybindings
 local silent = { silent = true }
 
 map("n", "<F1>", "<cmd>FloatermToggle<cr>", silent)
+map("n", "<F5>", "<cmd>FloatermSend<cr>", silent)
+
+map("n", "<leader>e", "<cmd>FloatermNew lf<cr>", silent)
+map("n", "<leader>l", "<cmd>FloatermNew lazygit<cr>", silent)
+
+map("n", "<leader>t", "<cmd>NvimTreeToggle<cr>", silent)
 map("n", "<leader>f", "<cmd>Telescope find_files<cr>", silent)
 
 -- Moving bitween windows with ease
@@ -136,3 +142,24 @@ map("v", "<", "<gv", silent)
 map("v", ">", ">gv", silent)
 
 map("n", "<A-f>", ":fin ")
+
+map("n", "<leader>dd", "<cmd>call vimspector#launch()<cr>", silent)
+map("n", "<leader>dc", "<cmd>call GotoWindow(g:vimspector_session_window.code)<cr>", silent)
+map("n", "<leader>dt", "<cmd>call GotoWindow(g:vimspector_session_window.tagpage)<cr>", silent)
+map("n", "<leader>dv", "<cmd>call GotoWindow(g:vimspector_session_window.variables)<cr>", silent)
+map("n", "<leader>dw", "<cmd>call GotoWindow(g:vimspector_session_window.watches)<cr>", silent)
+map("n", "<leader>ds", "<cmd>call GotoWindow(g:vimspector_session_window.stack_trace)<cr>", silent)
+map("n", "<leader>do", "<cmd>call GotoWindow(g:vimspector_session_window.output)<cr>", silent)
+map("n", "<leader>de", "<cmd>call vimspector#Reset()<cr>", silent)
+
+map("n", "<leader>dtcb", "<cmd>call vimspector#CleanLineBreakpoint()<cr>", silent)
+
+map("n", "<leader>dl", "<plug>VimspectorStepInto", { silent = true, noremap = false })
+map("n", "<leader>dj", "<plug>VimspectorStepOver", { silent = true, noremap = false })
+map("n", "<leader>dk", "<plug>VimspectorStepOut", { silent = true, noremap = false })
+map("n", "<leader>d_", "<plug>VimspectorRestart", { silent = true, noremap = false })
+map("n", "<leader>d<space>", "<cmd>call vimspector#Continue()<cr>", silent)
+
+map("n", "<leader>drc", "<plug>VimspectorRunToCursor", { silent = true, noremap = false })
+map("n", "<leader>dbp", "<plug>VimspectorToogleBreakpoint", { silent = true, noremap = false })
+map("n", "<leader>dcbp", "<plug>VimspectorToogleConditionalBreakpoint", { silent = true, noremap = false })
