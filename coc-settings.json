@@ -1,0 +1,11 @@
+{
+  "coc.preferences.formatOnSaveFiletypes": [
+    "css",
+    "markdown",
+    "html",
+    "typescript",
+    "javascript",
+    "json"
+  ],
+  "suggest.noselect": false
+}
