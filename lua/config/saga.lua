@@ -2,10 +2,10 @@ local saga = require("lspsaga")
 
 saga.init_lsp_saga({
     use_saga_diagnostic_sign = true,
-    error_sign = 'E',
-    warn_sign = 'W',
-    hint_sign = 'H',
-    infor_sign = 'I',
+    error_sign = '>>',
+    warn_sign = '>>',
+    hint_sign = '>>',
+    infor_sign = '>>',
     dianostic_header_icon = '   ',
     code_action_icon = ' ',
     code_action_prompt = {
@@ -28,5 +28,5 @@ saga.init_lsp_saga({
     },
     definition_preview_icon = '  ',
     border_style = "round",
-    rename_prompt_prefix = '➤',
+    rename_prompt_prefix = '>',
 })
