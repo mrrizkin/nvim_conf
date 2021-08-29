@@ -106,15 +106,7 @@ return packer.startup(function()
     requires = "plenary.nvim",
     event = "BufRead",
     config = function()
-      require("gitsigns").setup({
-        signs = {
-          add = { text = '+' },
-          change = { text = '~' },
-          delete = { text = '_' },
-          topdelete = { text = '‾' },
-          changedelete = { text = '~' },
-        },
-      })
+      require("gitsigns").setup()
     end,
   })
 
