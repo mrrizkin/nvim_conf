@@ -32,7 +32,7 @@ return packer.startup(function()
     opt = true,
     config = function()
       require("nvim-treesitter.configs").setup({
-        ensure_installed = { "bash", "lua", "html", "css", "scss", "sass", "typescript" },
+        ensure_installed = { "bash", "lua", "html", "css", "scss", "typescript" },
         highlight = { enable = true, use_languagetree = true },
       })
     end,
