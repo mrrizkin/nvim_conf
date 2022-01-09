@@ -1,0 +1,31 @@
+{
+  "suggest.noselect": false,
+  "coc.preferences.formatOnSaveFiletypes": ["html", "css", "scss", "javascript", "typescript"],
+  "suggest.completionItemKindLabels": {
+    "method": "",
+    "function": "",
+    "variable": "",
+    "field": "ﰠ",
+    "typeParameter": "",
+    "constant": "",
+    "class": "ﴯ",
+    "interface": "",
+    "struct": "פּ",
+    "event": "",
+    "operator": "",
+    "module": "",
+    "property": "ﰠ",
+    "enum": "",
+    "reference": "",
+    "keyword": "",
+    "file": "",
+    "folder": "",
+    "color": "",
+    "unit": "塞",
+    "snippet": "",
+    "text": "",
+    "constructor": "",
+    "value": "",
+    "enumMember": ""
+  }
+}
