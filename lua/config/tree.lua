@@ -1,12 +1,13 @@
 local g = vim.g
 local tree_cb = require('nvim-tree.config').nvim_tree_callback
 
-require'nvim-tree'.setup {
+vim.cmd [[autocmd BufEnter * ++nested if winnr('$') == 1 && bufname() == 'NvimTree_' . tabpagenr() | quit | endif]]
+
+require"nvim-tree".setup {
   disable_netrw       = true,
   hijack_netrw        = true,
   open_on_setup       = false,
   ignore_ft_on_setup  = {},
-  auto_close          = true,
   open_on_tab         = false,
   update_to_buf_dir   = {
     enable = true,

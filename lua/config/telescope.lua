@@ -4,12 +4,10 @@ if not present then
   return false
 end
 
-telescope.setup({
+telescope.setup {
 	pickers = {
 		buffers = {
 			sort_lastused = true,
-			theme = "dropdown",
-			previewer = false,
 			mappings = {
 				i = {
 					["<c-d>"] = require("telescope.actions").delete_buffer,
@@ -19,9 +17,5 @@ telescope.setup({
 				}
 			}
 		},
-		find_files = {
-			theme = "dropdown",
-			previewer = false,
-		}
 	},
-})
+}

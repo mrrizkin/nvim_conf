@@ -1,10 +1,7 @@
-local present1, autopairs = pcall(require, "nvim-autopairs")
--- local present2, cmp_autopairs = pcall(require, "nvim-autopairs.completion.cmp")
+local present, autopairs = pcall(require, "nvim-autopairs")
 
--- if present1 and present2 then
-if present1 then
-  autopairs.setup()
-
-  -- local cmp = require "cmp"
-  -- cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+if not present then
+  return false
 end
+
+autopairs.setup()

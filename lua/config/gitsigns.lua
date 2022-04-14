@@ -4,7 +4,7 @@ if not present then
   return false
 end
 
-gutter.setup({
+gutter.setup {
   signs = {
     add = { text = '+' },
     change = { text = '~' },
@@ -12,4 +12,4 @@ gutter.setup({
     topdelete = { text = '-' },
     changedelete = { text = '~' }
   }
-})
+}

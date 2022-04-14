@@ -12,5 +12,8 @@ ts_config.setup({
   },
   autotag = {
     enable = true
+  },
+  indent = {
+    enable = false
   }
 })
