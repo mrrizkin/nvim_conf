@@ -36,19 +36,15 @@ return packer.startup(function()
 
     use {
         "williamboman/nvim-lsp-installer",
-        requires = { "neovim/nvim-lspconfig" },
-        config = function()
-            require("config.lsp")
-        end
+        requires = { "neovim/nvim-lspconfig", "lukas-reineke/lsp-format.nvim" },
+        config = "require('config.lsp')"
     }
 
     -- treesitter
     use {
         "nvim-treesitter/nvim-treesitter",
         run = ":TSUpdate",
-        config = function()
-            require("config.treesitter")
-        end
+        config = "require('config.treesitter')"
     }
 
     use "nvim-treesitter/playground"
@@ -56,18 +52,19 @@ return packer.startup(function()
     -- telescope
     use {
         "nvim-telescope/telescope.nvim",
-        config = function()
-            require("config.telescope")
-        end
+        config = "require('config.telescope')"
     }
     use {
         "nvim-telescope/telescope-fzf-native.nvim",
-        run = "make",
-        cmd = "Telescope"
+        run = "make"
     }
+    use "nvim-telescope/telescope-media-files.nvim"
+    use "nvim-telescope/telescope-symbols.nvim"
+
     use {
-        "nvim-telescope/telescope-media-files.nvim",
-        cmd = "Telescope"
+        "renerocksai/telekasten.nvim",
+        requires = "renerocksai/calendar-vim",
+        config = "require('config.zettelkasten')"
     }
 
     -- completion
@@ -82,41 +79,30 @@ return packer.startup(function()
             "saadparwaiz1/cmp_luasnip",
             "onsails/lspkind-nvim"
         },
-        config = function()
-            require("config.nvimcmp")
-        end
+        config = "require('config.nvim-cmp')"
     }
 
     use {
         "L3MON4D3/LuaSnip",
-        config = function()
-            require("config.luasnip")
-        end
+        config = "require('config.lua-snip')"
     }
 
     use {
         "rafamadriz/friendly-snippets",
         requires = "L3MON4D3/LuaSnip",
-        config = function ()
-            require("luasnip.loaders.from_vscode").lazy_load()
-        end
+        config = "require('luasnip.loaders.from_vscode').lazy_load()"
     }
 
     -- gitsign
     use {
         "lewis6991/gitsigns.nvim",
         requires = "plenary.nvim",
-        config = function()
-            require("config.gitsigns")
-        end
+        config = "require('config.gitsigns')"
     }
 
-    -- nvim comment
     use {
-        "terrortylor/nvim-comment",
-        config = function()
-            require("config.nvim_comment")
-        end
+        "numToStr/Comment.nvim",
+        config = "require('Comment').setup()"
     }
 
     -- nvim-tree
@@ -124,23 +110,31 @@ return packer.startup(function()
         "kyazdani42/nvim-tree.lua",
         cmd = "NvimTreeToggle",
         requires = "kyazdani42/nvim-web-devicons",
-        config = function()
-            require("config.tree")
-        end
+        config = "require('config.nvim-tree')"
+    }
+
+    use {
+        'nvim-lualine/lualine.nvim',
+        requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+        config = "require('config.lua-line')"
     }
 
     -- autopairs
     use {
         "windwp/nvim-autopairs",
-        config = function()
-            require("config.autopairs")
-        end
+        config = "require('nvim-autopairs').setup()"
     }
 
     use {
         "doums/darcula",
         config = function ()
             vim.cmd [[colorscheme darcula]]
+            vim.cmd [[hi tklink ctermfg=65 guifg=#629755 cterm=underline gui=underline]]
+            vim.cmd [[hi tkBrackets guifg=#606060]]
+            vim.cmd [[hi tkHighlight ctermbg=220 ctermfg=235 cterm=bold guibg=#FFEF28 guifg=#2b2b2b gui=bold]]
+            vim.cmd [[hi link CalNavi CalRuler]]
+            vim.cmd [[hi tkTagSep ctermfg=248 guifg=#A4A3A3]]
+            vim.cmd [[hi tkTag ctermfg=180 guifg=#E8BF6A]]
         end
     }
 
@@ -150,15 +144,11 @@ return packer.startup(function()
 
     use {
         "norcalli/nvim-colorizer.lua",
-        config = function ()
-            require("colorizer").setup()
-        end
+        config = "require('colorizer').setup()"
     }
 
     use "terryma/vim-multiple-cursors"
 
     use "voldikss/vim-floaterm"
-
-    use "lifepillar/vim-colortemplate"
 
 end)

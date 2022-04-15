@@ -5,7 +5,7 @@ if not present then
 end
 
 ts_config.setup({
-  ensure_installed = "maintained",
+  ensure_installed = { "go", "rust", "lua", "javascript", "typescript", "css", "html" },
   highlight = {
     enable = true,
     use_languagetree = true

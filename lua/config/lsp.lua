@@ -1,5 +1,6 @@
 local lsp_installer = require("nvim-lsp-installer")
 local cmp = require("cmp_nvim_lsp")
+local lsp_format = require("lsp-format")
 
 lsp_installer.on_server_ready(function(server)
     local opts = {}
@@ -17,6 +18,12 @@ lsp_installer.on_server_ready(function(server)
                     }
                 }
             }
+        }
+    end
+
+    if server.name == "gopls" then
+        opts = {
+            on_attach = lsp_format.on_attach
         }
     end
 
