@@ -2,6 +2,8 @@ local lsp_installer = require("nvim-lsp-installer")
 local cmp = require("cmp_nvim_lsp")
 local lsp_format = require("lsp-format")
 
+vim.cmd [[autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false, scope="cursor"})]]
+
 lsp_installer.on_server_ready(function(server)
     local opts = {}
 
