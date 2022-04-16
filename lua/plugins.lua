@@ -128,13 +128,23 @@ return packer.startup(function()
     use {
         "doums/darcula",
         config = function ()
-            vim.cmd [[colorscheme darcula]]
-            vim.cmd [[hi tklink ctermfg=65 guifg=#629755 cterm=underline gui=underline]]
-            vim.cmd [[hi tkBrackets guifg=#606060]]
-            vim.cmd [[hi tkHighlight ctermbg=220 ctermfg=235 cterm=bold guibg=#FFEF28 guifg=#2b2b2b gui=bold]]
-            vim.cmd [[hi link CalNavi CalRuler]]
-            vim.cmd [[hi tkTagSep ctermfg=248 guifg=#A4A3A3]]
-            vim.cmd [[hi tkTag ctermfg=180 guifg=#E8BF6A]]
+            vim.cmd [[colorscheme darcula
+              hi tklink ctermfg=65 guifg=#629755 cterm=underline gui=underline
+              hi tkBrackets guifg=#606060
+              hi tkHighlight ctermbg=220 ctermfg=235 cterm=bold guibg=#FFEF28 guifg=#2b2b2b gui=bold
+              hi link CalNavi CalRuler
+              hi tkTagSep ctermfg=248 guifg=#A4A3A3
+              hi tkTag ctermfg=180 guifg=#E8BF6A
+              highlight! DiagnosticLineNrError guibg=#51202A guifg=#FF0000 gui=bold
+              highlight! DiagnosticLineNrWarn guibg=#51412A guifg=#FFA500 gui=bold
+              highlight! DiagnosticLineNrInfo guibg=#1E535D guifg=#00FFFF gui=bold
+              highlight! DiagnosticLineNrHint guibg=#1E205D guifg=#0000FF gui=bold
+
+              sign define DiagnosticSignError text= texthl=DiagnosticSignError linehl= numhl=DiagnosticLineNrError
+              sign define DiagnosticSignWarn text= texthl=DiagnosticSignWarn linehl= numhl=DiagnosticLineNrWarn
+              sign define DiagnosticSignInfo text= texthl=DiagnosticSignInfo linehl= numhl=DiagnosticLineNrInfo
+              sign define DiagnosticSignHint text= texthl=DiagnosticSignHint linehl= numhl=DiagnosticLineNrHint
+            ]]
         end
     }
 
