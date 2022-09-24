@@ -1,4 +1,3 @@
-local cmd = vim.cmd
 local o_s = vim.o
 local map_key = vim.api.nvim_set_keymap
 
@@ -7,21 +6,6 @@ local function opt(o, v, scopes)
 	for _, s in ipairs(scopes) do
 		s[o] = v
 	end
-end
-
-local function autocmd(group, cmds, clear)
-	clear = clear == nil and false or clear
-	if type(cmds) == "string" then
-		cmds = { cmds }
-	end
-	cmd("augroup " .. group)
-	if clear then
-		cmd([[au!]])
-	end
-	for _, c in ipairs(cmds) do
-		cmd("autocmd " .. c)
-	end
-	cmd([[augroup END]])
 end
 
 local function map(modes, lhs, rhs, opts)
@@ -43,4 +27,4 @@ local function highlight(group, color)
 	vim.api.nvim_command("highlight " .. group .. " " .. style .. " " .. fg .. " " .. bg .. " " .. sp)
 end
 
-return { opt = opt, autocmd = autocmd, map = map, highlight = highlight }
+return { opt = opt, map = map, highlight = highlight }

@@ -1,4 +1,7 @@
 local cmd = vim.cmd
+local api = vim.api
+local augroup = api.nvim_create_augroup
+local autocmd = api.nvim_create_autocmd
 
 -- Packer
 cmd([[command! PackerInstall packadd packer.nvim | lua require("plugins").install()]])
@@ -22,17 +25,9 @@ cmd([[cnoreabbrev W w]])
 cmd([[cnoreabbrev Q q]])
 cmd([[cnoreabbrev Qall qall]])
 
-cmd([[
-augroup FormatAutogroup
-  autocmd!
-  autocmd BufWritePost * silent! FormatWrite
-augroup END
-]])
+local format_auto_group = augroup("FormatAutogroup", { clear = true })
+autocmd("BufWritePost", { pattern = "*", command = "silent! FormatWrite", group = format_auto_group })
 
-cmd([[
-augroup TrimTrailingWhiteSpace
-  au!
-  au BufWritePre * %s/\s\+$//e
-  au BufWritePre * %s/\n\+\%$//e
-augroup END
-]])
+local trim_trailing_white_space = augroup("TrimTrailingWhiteSpace", { clear = true })
+autocmd("BufWritePre", { pattern = "*", command = [[%s/\s\+$//e]], group = trim_trailing_white_space })
+autocmd("BufWritePre", { pattern = "*", command = [[%s/\n\+\%$//e]], group = trim_trailing_white_space })
