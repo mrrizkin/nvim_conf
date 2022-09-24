@@ -4,161 +4,168 @@ local present, _ = pcall(require, "packer_init")
 local packer
 
 if present then
-    packer = require("packer")
+	packer = require("packer")
 else
-    return false
+	return false
 end
 
 local use = packer.use
 
 -- plugins
 return packer.startup(function()
-    -- packer
-    use {
-        "wbthomason/packer.nvim",
-        opt = true
-    }
+	-- packer
+	use({
+		"wbthomason/packer.nvim",
+		opt = true,
+	})
 
-    -- plenary
-    use {
-        "nvim-lua/plenary.nvim",
-        module = "plenary",
-        opt = true
-    }
+	-- plenary
+	use({
+		"nvim-lua/plenary.nvim",
+		module = "plenary",
+		opt = true,
+	})
 
-    -- popup
-    use {
-        "nvim-lua/popup.nvim",
-        module = "popup",
-        requires = { "nvim-lua/plenary.nvim" },
-        opt = true
-    }
+	-- popup
+	use({
+		"nvim-lua/popup.nvim",
+		module = "popup",
+		requires = { "nvim-lua/plenary.nvim" },
+		opt = true,
+	})
 
-    use {
-        "williamboman/nvim-lsp-installer",
-        requires = { "neovim/nvim-lspconfig", "lukas-reineke/lsp-format.nvim" },
-        config = "require('config.lsp')"
-    }
+	-- lsp
+	use({
+		"williamboman/nvim-lsp-installer",
+		requires = { "neovim/nvim-lspconfig" },
+		config = "require('config.lsp')",
+	})
 
-    -- treesitter
-    use {
-        "nvim-treesitter/nvim-treesitter",
-        run = ":TSUpdate",
-        config = "require('config.treesitter')"
-    }
+	-- formatter
+	use({
+		"mhartington/formatter.nvim",
+		config = "require('config.formatter')",
+	})
 
-    use "nvim-treesitter/playground"
+	-- treesitter
+	use({
+		"nvim-treesitter/nvim-treesitter",
+		run = ":TSUpdate",
+		config = "require('config.treesitter')",
+	})
 
-    -- telescope
-    use {
-        "nvim-telescope/telescope.nvim",
-        config = "require('config.telescope')"
-    }
-    use {
-        "nvim-telescope/telescope-fzf-native.nvim",
-        run = "make"
-    }
-    use "nvim-telescope/telescope-media-files.nvim"
-    use "nvim-telescope/telescope-symbols.nvim"
+	use({
+		"SmiteshP/nvim-gps",
+		requires = "nvim-treesitter/nvim-treesitter",
+		config = "require('config.nvim-gpsconfig')",
+	})
+	-- telescope
+	use({
+		"nvim-telescope/telescope.nvim",
+		config = "require('config.telescope')",
+	})
+	use("nvim-telescope/telescope-fzy-native.nvim")
+	use("nvim-telescope/telescope-media-files.nvim")
+	use("nvim-telescope/telescope-symbols.nvim")
+	use({
+		"benfowler/telescope-luasnip.nvim",
+		module = "telescope._extensions.luasnip", -- if you wish to lazy-load
+	})
 
-    use {
-        "renerocksai/telekasten.nvim",
-        requires = "renerocksai/calendar-vim",
-        config = "require('config.zettelkasten')"
-    }
+	-- copilot
+	use({
+		"zbirenbaum/copilot.lua",
+		event = { "VimEnter" },
+		config = "require('config.nvim-copilot')",
+	})
 
-    -- completion
-    use {
-        "hrsh7th/nvim-cmp",
-        requires = {
-            "hrsh7th/cmp-nvim-lsp",
-            "hrsh7th/cmp-nvim-lua",
-            "hrsh7th/cmp-buffer",
-            "hrsh7th/cmp-path",
-            "hrsh7th/cmp-cmdline",
-            "saadparwaiz1/cmp_luasnip",
-            "onsails/lspkind-nvim"
-        },
-        config = "require('config.nvim-cmp')"
-    }
+	use({
+		"zbirenbaum/copilot-cmp",
+		after = { "copilot.lua" },
+		config = "require('config.nvim-copilot-cmp')",
+	})
 
-    use {
-        "L3MON4D3/LuaSnip",
-        config = "require('config.lua-snip')"
-    }
+	-- completion
+	use({
+		"hrsh7th/nvim-cmp",
+		requires = {
+			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-nvim-lua",
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-path",
+			"hrsh7th/cmp-cmdline",
+			"saadparwaiz1/cmp_luasnip",
+			"onsails/lspkind-nvim",
+		},
+		config = "require('config.nvim-cmp')",
+	})
 
-    use {
-        "rafamadriz/friendly-snippets",
-        requires = "L3MON4D3/LuaSnip",
-        config = "require('luasnip.loaders.from_vscode').lazy_load()"
-    }
+	use({
+		"L3MON4D3/LuaSnip",
+		config = "require('config.lua-snip')",
+	})
 
-    -- gitsign
-    use {
-        "lewis6991/gitsigns.nvim",
-        requires = "plenary.nvim",
-        config = "require('config.gitsigns')"
-    }
+	-- gitsign
+	use({
+		"lewis6991/gitsigns.nvim",
+		requires = "plenary.nvim",
+		config = "require('config.gitsigns')",
+	})
 
-    use {
-        "numToStr/Comment.nvim",
-        config = "require('Comment').setup()"
-    }
+	use({
+		"numToStr/Comment.nvim",
+		config = "require('Comment').setup()",
+	})
 
-    -- nvim-tree
-    use {
-        "kyazdani42/nvim-tree.lua",
-        cmd = "NvimTreeToggle",
-        requires = "kyazdani42/nvim-web-devicons",
-        config = "require('config.nvim-tree')"
-    }
+	-- nvim-tree
+	use({
+		"kyazdani42/nvim-tree.lua",
+		cmd = "NvimTreeToggle",
+		requires = "kyazdani42/nvim-web-devicons",
+		config = "require('config.nvim-tree')",
+	})
 
-    use {
-        'nvim-lualine/lualine.nvim',
-        requires = { 'kyazdani42/nvim-web-devicons', opt = true },
-        config = "require('config.lua-line')"
-    }
+	use({
+		"nvim-lualine/lualine.nvim",
+		requires = { "kyazdani42/nvim-web-devicons", opt = true },
+		config = "require('config.lua-line')",
+	})
 
-    -- autopairs
-    use {
-        "windwp/nvim-autopairs",
-        config = "require('nvim-autopairs').setup()"
-    }
+	-- autopairs
+	use({
+		"windwp/nvim-autopairs",
+		config = "require('nvim-autopairs').setup()",
+	})
 
-    use {
-        "doums/darcula",
-        config = function ()
-            vim.cmd [[colorscheme darcula
-              hi tklink ctermfg=65 guifg=#629755 cterm=underline gui=underline
-              hi tkBrackets guifg=#606060
-              hi tkHighlight ctermbg=220 ctermfg=235 cterm=bold guibg=#FFEF28 guifg=#2b2b2b gui=bold
-              hi link CalNavi CalRuler
-              hi tkTagSep ctermfg=248 guifg=#A4A3A3
-              hi tkTag ctermfg=180 guifg=#E8BF6A
-              highlight! DiagnosticLineNrError guibg=#51202A guifg=#FF0000 gui=bold
-              highlight! DiagnosticLineNrWarn guibg=#51412A guifg=#FFA500 gui=bold
-              highlight! DiagnosticLineNrInfo guibg=#1E535D guifg=#00FFFF gui=bold
-              highlight! DiagnosticLineNrHint guibg=#1E205D guifg=#0000FF gui=bold
+	use({
+		"navarasu/onedark.nvim",
+		config = "require('config.nvim-onedark')",
+	})
 
-              sign define DiagnosticSignError text= texthl=DiagnosticSignError linehl= numhl=DiagnosticLineNrError
-              sign define DiagnosticSignWarn text= texthl=DiagnosticSignWarn linehl= numhl=DiagnosticLineNrWarn
-              sign define DiagnosticSignInfo text= texthl=DiagnosticSignInfo linehl= numhl=DiagnosticLineNrInfo
-              sign define DiagnosticSignHint text= texthl=DiagnosticSignHint linehl= numhl=DiagnosticLineNrHint
-            ]]
-        end
-    }
+	-- use({ "jwalton512/vim-blade" })
 
-    use "tpope/vim-fugitive"
+	use({
+		"folke/which-key.nvim",
+		config = "require('config.nvim-wkey')",
+	})
 
-    use "andymass/vim-matchup"
+	use("tpope/vim-fugitive")
 
-    use {
-        "norcalli/nvim-colorizer.lua",
-        config = "require('colorizer').setup()"
-    }
+	use("andymass/vim-matchup")
 
-    use "terryma/vim-multiple-cursors"
+	use("preservim/tagbar")
 
-    use "voldikss/vim-floaterm"
+	use({
+		"norcalli/nvim-colorizer.lua",
+		config = "require('colorizer').setup(nil, { css = true })",
+	})
 
+	use("terryma/vim-multiple-cursors")
+
+	use({
+		"kylechui/nvim-surround",
+		config = "require('nvim-surround').setup({})",
+	})
+
+	use("voldikss/vim-floaterm")
 end)

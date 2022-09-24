@@ -1,31 +1,30 @@
 local present, telescope = pcall(require, "telescope")
 
 if not present then
-  return false
+	return false
 end
 
-telescope.setup {
-	pickers = {
-		buffers = {
-			sort_lastused = true,
-			mappings = {
-				i = {
-					["<c-d>"] = require("telescope.actions").delete_buffer,
-				},
-				n = {
-					["<c-d>"] = require("telescope.actions").delete_buffer,
-				}
-			}
+local sorters = require("telescope.sorters")
+
+telescope.setup({
+	defaults = {
+		file_sorter = sorters.get_fzy_sorter,
+		file_ignore_patterns = { "^public/", "%.png", "%.jpeg", "%.jpg" },
+	},
+	extensions = {
+		media_files = {
+			filetypes = { "png", "webp", "jpg", "jpeg" },
+			find_cmd = "rg",
+		},
+		extensions = {
+			fzy_native = {
+				override_generic_sorter = false,
+				override_file_sorter = true,
+			},
 		},
 	},
-    extensions = {
-        media_files = {
-            -- filetypes whitelist
-            -- defaults to {"png", "jpg", "mp4", "webm", "pdf"}
-            filetypes = {"png", "webp", "jpg", "jpeg"},
-            find_cmd = "rg" -- find command (defaults to `fd`)
-        }
-    },
-}
+})
 
-telescope.load_extension('media_files')
+telescope.load_extension("media_files")
+telescope.load_extension("fzy_native")
+telescope.load_extension("luasnip")

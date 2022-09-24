@@ -15,39 +15,41 @@ g.node_host_prog = "~/.local/npm/bin/neovim-node-host"
 
 -- disable built-in plugins
 local disabled_built_ins = {
-    "2html_plugin",
-    "getscript",
-    "getscriptPlugin",
-    "gzip",
-    "logipat",
-    "matchit",
-    "matchparen",
-    "netrw",
-    "netrwFileHandlers",
-    "netrwPlugin",
-    "netrwSettings",
-    "remote_plugins",
-    "rrhelper",
-    "shada_plugin",
-    "spellfile_plugin",
-    "tar",
-    "tarPlugin",
-    "tutor_mode_plugin",
-    "vimball",
-    "vimballPlugin",
-    "zip",
-    "zipPlugin"
+	"2html_plugin",
+	"getscript",
+	"getscriptPlugin",
+	"gzip",
+	"logipat",
+	"matchit",
+	"matchparen",
+	"netrw",
+	"netrwFileHandlers",
+	"netrwPlugin",
+	"netrwSettings",
+	"remote_plugins",
+	"rrhelper",
+	"shada_plugin",
+	"spellfile_plugin",
+	"tar",
+	"tarPlugin",
+	"tutor_mode_plugin",
+	"vimball",
+	"vimballPlugin",
+	"zip",
+	"zipPlugin",
 }
 for _, plugin in pairs(disabled_built_ins) do
-    g["loaded_" .. plugin] = 1
+	g["loaded_" .. plugin] = 1
 end
 
 -- Settings
 require("settings")
 require("commands")
 require("keymaps")
-require("snippets")
 
 -- Plugins Settings
 g.floaterm_keymap_toggle = "<F10>"
+g.floaterm_borderchars = "─│─│╭╮╯╰"
 g.matchup_matchparen_offscreen = { method = "popup" }
+g.floaterm_width = 0.8
+g.floaterm_height = 0.8
