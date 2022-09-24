@@ -138,11 +138,9 @@ return packer.startup(function()
 	})
 
 	use({
-		"navarasu/onedark.nvim",
-		config = "require('config.nvim-onedark')",
+		"olivercederborg/poimandres.nvim",
+		config = "require('config.nvim-poimandres')",
 	})
-
-	-- use({ "jwalton512/vim-blade" })
 
 	use({
 		"folke/which-key.nvim",
