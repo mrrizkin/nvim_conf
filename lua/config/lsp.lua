@@ -32,7 +32,7 @@ vim.diagnostic.config({
 	-- signs = true,
 })
 
-local capabilities = cmp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = cmp.default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 lspconfig.sumneko_lua.setup({
 	settings = {
