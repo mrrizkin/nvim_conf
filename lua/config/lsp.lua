@@ -34,6 +34,15 @@ vim.diagnostic.config({
 
 local capabilities = cmp.default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
+local on_attach = function()
+	require("lsp_signature").on_attach({
+		doc_lines = 0,
+		handler_opts = {
+			border = "none",
+		},
+	})
+end
+
 lspconfig.sumneko_lua.setup({
 	settings = {
 		Lua = {
@@ -50,14 +59,19 @@ lspconfig.sumneko_lua.setup({
 		},
 	},
 	capabilities = capabilities,
+	on_attach = on_attach,
 })
 
-lspconfig.tsserver.setup({ capabilities = capabilities })
-lspconfig.intelephense.setup({ capabilities = capabilities, filetypes = { "php", "blade" } })
+lspconfig.tsserver.setup({
+	capabilities = capabilities,
+	on_attach = on_attach,
+})
+lspconfig.intelephense.setup({ capabilities = capabilities, filetypes = { "php", "blade" }, on_attach = on_attach })
 lspconfig.emmet_ls.setup({
 	capabilities = capabilities,
 	filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "blade" },
+	on_attach = on_attach,
 })
-lspconfig.html.setup({ capabilities = capabilities })
-lspconfig.gopls.setup({ capabilities = capabilities })
-lspconfig.rust_analyzer.setup({ capabilities = capabilities })
+lspconfig.html.setup({ capabilities = capabilities, on_attach = on_attach })
+lspconfig.gopls.setup({ capabilities = capabilities, on_attach = on_attach })
+lspconfig.rust_analyzer.setup({ capabilities = capabilities, on_attach = on_attach })

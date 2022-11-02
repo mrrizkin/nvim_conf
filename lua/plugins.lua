@@ -41,6 +41,11 @@ return packer.startup(function()
 		config = "require('config.lsp')",
 	})
 
+	-- lsp-signature
+	use({
+		"ray-x/lsp_signature.nvim",
+	})
+
 	-- formatter
 	use({
 		"mhartington/formatter.nvim",
@@ -131,8 +136,13 @@ return packer.startup(function()
 	})
 
 	use({
-		"olivercederborg/poimandres.nvim",
+		"~/Develop/Codetribute/poimandres.nvim",
 		config = "require('config.nvim-poimandres')",
+	})
+
+	use({
+		"rmehri01/onenord.nvim",
+		config = "require('config.nvim-onenord')",
 	})
 
 	use({
