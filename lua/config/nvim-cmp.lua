@@ -18,13 +18,13 @@ cmp.setup({
 		}),
 		["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior }),
 		["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior }),
-		["<Tab>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+		["<cr>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 	},
 	sources = cmp.config.sources({
 		{ name = "nvim_lua" },
 		{ name = "luasnip" },
 		{ name = "nvim_lsp" },
-		{ name = "copilot" },
+		-- { name = "copilot" },
 		{ name = "path" },
 		{ name = "buffer", keyword_length = 5 },
 	}),
@@ -36,22 +36,22 @@ cmp.setup({
 				buffer = "[buf]",
 				nvim_lsp = "[lsp]",
 				nvim_lua = "[api]",
-				copilot = "[cop]",
+				-- copilot = "[cop]",
 				path = "[path]",
 				luasnip = "[snip]",
 			},
-			before = function(entry, vim_item)
-				vim_item.kind = lspkind.presets.default[vim_item.kind]
-				if entry.source.name == "copilot" then
-					vim_item.kind = ""
-				end
-				return vim_item
-			end,
+			-- before = function(entry, vim_item)
+			-- 	vim_item.kind = lspkind.presets.default[vim_item.kind]
+			-- 	if entry.source.name == "copilot" then
+			-- 		vim_item.kind = ""
+			-- 	end
+			-- 	return vim_item
+			-- end,
 		}),
 	},
-	experimental = {
-		ghost_text = true,
-	},
+	-- experimental = {
+	-- 	ghost_text = true,
+	-- },
 })
 
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).

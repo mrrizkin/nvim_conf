@@ -74,15 +74,8 @@ return packer.startup(function()
 
 	-- copilot
 	use({
-		"zbirenbaum/copilot.lua",
-		event = { "VimEnter" },
+		"github/copilot.vim",
 		config = "require('config.nvim-copilot')",
-	})
-
-	use({
-		"zbirenbaum/copilot-cmp",
-		after = { "copilot.lua" },
-		config = "require('config.nvim-copilot-cmp')",
 	})
 
 	-- completion

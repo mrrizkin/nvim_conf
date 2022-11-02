@@ -1,3 +1,3 @@
-vim.defer_fn(function()
-	require("copilot").setup()
-end, 100)
+-- vim.defer_fn(function()
+-- 	require("copilot").setup()
+-- end, 100)
