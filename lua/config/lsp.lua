@@ -37,6 +37,7 @@ local capabilities = cmp.default_capabilities(vim.lsp.protocol.make_client_capab
 local on_attach = function()
 	require("lsp_signature").on_attach({
 		doc_lines = 0,
+		floating_window = false,
 		handler_opts = {
 			border = "none",
 		},
@@ -75,3 +76,4 @@ lspconfig.emmet_ls.setup({
 lspconfig.html.setup({ capabilities = capabilities, on_attach = on_attach })
 lspconfig.gopls.setup({ capabilities = capabilities, on_attach = on_attach })
 lspconfig.rust_analyzer.setup({ capabilities = capabilities, on_attach = on_attach })
+lspconfig.pyright.setup({ capabilities = capabilities, on_attach = on_attach })

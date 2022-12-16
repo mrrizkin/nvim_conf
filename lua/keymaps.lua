@@ -22,7 +22,7 @@ nmap("gd", "<cmd>lua vim.lsp.buf.definition()<cr>")
 nmap("gt", "<cmd>lua vim.lsp.buf.type_definition()<cr>")
 nmap("gi", "<cmd>lua vim.lsp.buf.implementation()<cr>")
 nmap("gr", "<cmd>lua vim.lsp.buf.references()<cr>")
-nmap("<f3>", "<cmd>lua vim.lsp.buf.formatting()<cr>")
+nmap("<f3>", "<cmd>lua vim.lsp.buf.format({ async = true})<cr>")
 nmap("lwa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<cr>")
 nmap("lwr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<cr>")
 nmap("lws", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<cr>")
@@ -34,6 +34,8 @@ nmap("]d", "<cmd>lua vim.diagnostic.goto_next()<cr>")
 
 nmap("<c-s>", "<cmd>w<cr>")
 nmap("<c-p>", "<cmd>Telescope find_files<cr>")
+nmap("<a-d>", "<cmd>DBUI<cr>")
+nmap("<a-r>", "<cmd>Telescope live_grep<cr>")
 nmap("<a-p>", "<cmd>Telescope commands<cr>")
 
 -- keep it centered
@@ -98,7 +100,8 @@ wkey.register({
 	t = {
 		name = "Terminal",
 		f = { "<cmd>FloatermNew --width=0.8 --height=0.8 --title=\\ File\\ Manager\\  lf<cr>", "File Manager" },
-		g = { "<cmd>FloatermNew --width=0.8 --height=0.8 --title=\\ Git\\  lazygit<cr>", "File Manager" },
+		g = { "<cmd>FloatermNew --width=0.8 --height=0.8 --title=\\ Git\\  lazygit<cr>", "Git" },
+		t = { "<cmd>FloatermNew --width=0.8 --height=0.8 --title=\\ Kanban\\  kabmat<cr>", "Kanban" },
 	},
 	f = { "<cmd>NvimTreeToggle<cr>", "File Tree" },
 }, { prefix = "<leader>" })

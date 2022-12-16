@@ -146,6 +146,12 @@ return packer.startup(function()
 	})
 
 	use({
+		"kristijanhusak/vim-dadbod-ui",
+		requires = "tpope/vim-dadbod",
+		config = "require('config.nvim-dadbod')",
+	})
+
+	use({
 		"folke/which-key.nvim",
 		config = "require('config.nvim-wkey')",
 	})
