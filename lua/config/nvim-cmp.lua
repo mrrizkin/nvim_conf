@@ -24,7 +24,7 @@ cmp.setup({
 		{ name = "nvim_lua" },
 		{ name = "luasnip" },
 		{ name = "nvim_lsp" },
-		-- { name = "copilot" },
+		{ name = "vim-dadbod-completion", filetypes = { "sql", "mysql", "plsql" } },
 		{ name = "path" },
 		{ name = "buffer", keyword_length = 5 },
 	}),
