@@ -36,8 +36,8 @@ return packer.startup(function()
 
 	-- lsp
 	use({
-		"williamboman/nvim-lsp-installer",
-		requires = { "neovim/nvim-lspconfig" },
+		"williamboman/mason.nvim",
+		requires = { "neovim/nvim-lspconfig", "williamboman/mason-lspconfig.nvim" },
 		config = "require('config.lsp')",
 	})
 
@@ -136,7 +136,7 @@ return packer.startup(function()
 	})
 
 	use({
-		"~/Develop/Codetribute/poimandres.nvim",
+		"olivercederborg/poimandres.nvim",
 		config = "require('config.nvim-poimandres')",
 	})
 

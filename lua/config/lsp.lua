@@ -1,16 +1,19 @@
 local lspconfig = require("lspconfig")
 local cmp = require("cmp_nvim_lsp")
 
+require("mason").setup()
+
 -- NOTE: tsserver error when using nvim-lsp-installer
-require("nvim-lsp-installer").setup({
+require("mason-lspconfig").setup({
 	ensure_installed = {
 		"emmet_ls",
 		"gopls",
 		"html",
 		"pyright",
 		"rust_analyzer",
-		"sumneko_lua",
+		"lua_ls",
 		-- "tsserver"
+		"astro",
 	},
 })
 
@@ -44,7 +47,7 @@ local on_attach = function()
 	})
 end
 
-lspconfig.sumneko_lua.setup({
+lspconfig.lua_ls.setup({
 	settings = {
 		Lua = {
 			diagnostics = {
@@ -77,3 +80,4 @@ lspconfig.html.setup({ capabilities = capabilities, on_attach = on_attach })
 lspconfig.gopls.setup({ capabilities = capabilities, on_attach = on_attach })
 lspconfig.rust_analyzer.setup({ capabilities = capabilities, on_attach = on_attach })
 lspconfig.pyright.setup({ capabilities = capabilities, on_attach = on_attach })
+lspconfig.astro.setup({ capabilities = capabilities, on_attach = on_attach })
