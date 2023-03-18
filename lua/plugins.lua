@@ -181,4 +181,9 @@ return packer.startup(function()
 	})
 
 	use("voldikss/vim-floaterm")
+
+	use({
+		"rcarriga/nvim-notify",
+		config = "require('config.noty')",
+	})
 end)
