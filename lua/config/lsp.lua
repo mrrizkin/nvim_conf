@@ -12,7 +12,7 @@ require("mason-lspconfig").setup({
 		"pyright",
 		"rust_analyzer",
 		"lua_ls",
-		-- "tsserver"
+		"tsserver",
 		"astro",
 	},
 })

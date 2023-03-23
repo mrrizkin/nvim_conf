@@ -9,9 +9,16 @@ g.maplocalleader = [[,]]
 
 -- skip some remote provider loading
 g.loaded_python_provider = 0
+g.loaded_perl_provider = 0
 g.python_host_prog = "/usr/bin/python2"
 g.python3_host_prog = "/usr/bin/python"
-g.node_host_prog = "~/.local/npm/bin/neovim-node-host"
+
+-- uncomment if you don't use nvm
+-- g.node_host_prog = "~/.local/npm/bin/neovim-node-host"
+
+-- uncomment if you use nvm
+local node_version = vim.fn.system("node --version")
+g.node_host_prog = "~/.nvm/versions/node/" .. node_version .. "/bin/neovim-node-host"
 
 -- disable built-in plugins
 local disabled_built_ins = {
