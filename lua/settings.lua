@@ -4,7 +4,7 @@ local o, wo, bo = vim.o, vim.wo, vim.bo
 local buffer = { o, bo }
 local window = { o, wo }
 
-opt("guicursor", true)
+-- opt("guicursor", true)
 opt("mouse", "nivh")
 opt("background", "dark")
 opt("undofile", true, buffer)

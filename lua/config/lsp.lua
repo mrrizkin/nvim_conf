@@ -14,6 +14,7 @@ require("mason-lspconfig").setup({
 		"lua_ls",
 		"tsserver",
 		"astro",
+		"intelephense",
 	},
 })
 
