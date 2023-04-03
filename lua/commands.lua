@@ -10,6 +10,9 @@ cmd([[command! PackerSync packadd packer.nvim | lua require("plugins").sync()]])
 cmd([[command! PackerClean packadd packer.nvim | lua require("plugins").clean()]])
 cmd([[command! PackerCompile packadd packer.nvim | lua require("plugins").compile()]])
 
+-- Reload neovim
+cmd([[command! Reload source $MYVIMRC | redraw!]])
+
 -- Format using LSP
 cmd([[command! FormatLSP lua vim.lsp.buf.formatting()]])
 
