@@ -7,6 +7,9 @@ require("formatter").setup({
 		html = {
 			require("formatter.filetypes.javascript").prettierd,
 		},
+		astro = {
+			require("formatter.filetypes.javascript").prettierd,
+		},
 		css = {
 			require("formatter.filetypes.javascript").prettierd,
 		},
