@@ -1,5 +1,6 @@
 local ll = require("lualine")
-local gps = require("nvim-gps")
+-- local gps = require("nvim-gps")
+local navic = require("nvim-navic")
 
 local function lsp_status()
 	-- Lsp server name .
@@ -43,8 +44,12 @@ ll.setup({
 		lualine_c = {
 			"filename",
 			{
-				gps.get_location,
-				cond = gps.is_available,
+				function()
+					return navic.get_location()
+				end,
+				cond = function()
+					return navic.is_available()
+				end,
 			},
 		},
 		lualine_x = {

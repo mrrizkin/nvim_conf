@@ -59,11 +59,18 @@ return packer.startup(function()
 		config = "require('config.treesitter')",
 	})
 
-	use({
+	use({ -- deprecated
 		"SmiteshP/nvim-gps",
 		requires = "nvim-treesitter/nvim-treesitter",
 		config = "require('config.nvim-gpsconfig')",
 	})
+
+	use({
+		"SmiteshP/nvim-navic",
+		requires = "neovim/nvim-lspconfig",
+		config = "require('config.nvim-naviconfig')",
+	})
+
 	-- telescope
 	use({
 		"nvim-telescope/telescope.nvim",

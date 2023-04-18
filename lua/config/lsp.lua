@@ -1,5 +1,6 @@
 local lspconfig = require("lspconfig")
 local cmp = require("cmp_nvim_lsp")
+local navic = require("nvim-navic")
 
 require("mason").setup()
 
@@ -38,7 +39,10 @@ vim.diagnostic.config({
 
 local capabilities = cmp.default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
-local on_attach = function()
+local on_attach = function(client, bufnr)
+	if client.server_capabilities.documentSymbolProvider then
+		navic.attach(client, bufnr)
+	end
 	require("lsp_signature").on_attach({
 		doc_lines = 0,
 		floating_window = false,
