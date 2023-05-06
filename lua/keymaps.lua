@@ -36,7 +36,8 @@ nmap("<c-s>", "<cmd>w<cr>")
 nmap("<c-p>", "<cmd>Telescope find_files<cr>")
 nmap("<a-b>", "<cmd>Telescope buffers<cr>")
 nmap("<a-d>", "<cmd>DBUIToggle<cr>")
-nmap("<a-r>", "<cmd>Reload<cr>")
+-- nmap("<a-r>", "<cmd>Reload<cr>")
+nmap("<a-r>", "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<cr>")
 nmap("<a-p>", "<cmd>Telescope live_grep<cr>")
 
 -- close current buffer

@@ -74,14 +74,14 @@ return packer.startup(function()
 	-- telescope
 	use({
 		"nvim-telescope/telescope.nvim",
+		requires = {
+			{ "nvim-telescope/telescope-fzy-native.nvim" },
+			{ "nvim-telescope/telescope-media-files.nvim" },
+			{ "nvim-telescope/telescope-symbols.nvim" },
+			{ "benfowler/telescope-luasnip.nvim" },
+			{ "nvim-telescope/telescope-live-grep-args.nvim" },
+		},
 		config = "require('config.telescope')",
-	})
-	use("nvim-telescope/telescope-fzy-native.nvim")
-	use("nvim-telescope/telescope-media-files.nvim")
-	use("nvim-telescope/telescope-symbols.nvim")
-	use({
-		"benfowler/telescope-luasnip.nvim",
-		module = "telescope._extensions.luasnip", -- if you wish to lazy-load
 	})
 
 	-- copilot

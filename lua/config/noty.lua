@@ -1,6 +1,11 @@
 vim.notify = require("notify")
+local colors = require("onenord.colors").load()
+
 vim.notify.setup({
-    background_colour = "#1e222a",
+	background_colour = colors.bg,
+	fps = 24,
+	render = "minimal",
+    top_down = false,
 })
 -- Utility functions shared between progress reports for LSP and DAP
 
