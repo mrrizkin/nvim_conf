@@ -34,9 +34,13 @@ nmap("]d", "<cmd>lua vim.diagnostic.goto_next()<cr>")
 
 nmap("<c-s>", "<cmd>w<cr>")
 nmap("<c-p>", "<cmd>Telescope find_files<cr>")
+nmap("<a-b>", "<cmd>Telescope buffers<cr>")
 nmap("<a-d>", "<cmd>DBUIToggle<cr>")
 nmap("<a-r>", "<cmd>Reload<cr>")
 nmap("<a-p>", "<cmd>Telescope live_grep<cr>")
+
+-- close current buffer
+nmap("<c-w>", "<cmd>bd<cr>")
 
 -- keep it centered
 nmap("n", "nzzzv")
@@ -99,9 +103,8 @@ wkey.register({
 	},
 	t = {
 		name = "Terminal",
-		f = { "<cmd>FloatermNew --width=0.8 --height=0.8 --title=\\ File\\ Manager\\  lf<cr>", "File Manager" },
-		g = { "<cmd>FloatermNew --width=0.8 --height=0.8 --title=\\ Git\\  lazygit<cr>", "Git" },
-		t = { "<cmd>FloatermNew --width=0.8 --height=0.8 --title=\\ Kanban\\  kabmat<cr>", "Kanban" },
+		f = { "<cmd>FloatermNew --width=0.6 --height=0.6 --title=\\ File\\ Manager\\  lf<cr>", "File Manager" },
+		g = { "<cmd>FloatermNew --width=0.9 --height=0.9 --title=\\ Git\\  lazygit<cr>", "Git" },
 	},
 	f = { "<cmd>NvimTreeToggle<cr>", "File Tree" },
 }, { prefix = "<leader>" })

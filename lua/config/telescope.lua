@@ -41,6 +41,21 @@ telescope.setup({
 			file_ignore_patterns = { "node_modules", ".git", "^public/", "%.png", "%.jpeg", "%.jpg" },
 			max_results = 100,
 		},
+		buffers = {
+			theme_config = {
+				border = true,
+				previewer = false,
+			},
+			layout_config = {
+				width = 0.9,
+				height = 0.9,
+				prompt_position = "top",
+			},
+			sorting_strategy = "ascending",
+			layout_strategy = "horizontal",
+			file_ignore_patterns = { "node_modules", ".git", "^public/", "%.png", "%.jpeg", "%.jpg" },
+			max_results = 100,
+		},
 	},
 	extensions = {
 		media_files = {

@@ -1,3 +1,5 @@
+local colors = require("onenord.colors").load()
+
 require("onenord").setup({
 	theme = "dark",
 	borders = true, -- Split window borders
@@ -19,5 +21,8 @@ require("onenord").setup({
 	-- Inverse highlight for different groups
 	inverse = {
 		match_paren = false,
+	},
+	custom_highlights = {
+		["Floaterm"] = { bg = colors.bg },
 	},
 })

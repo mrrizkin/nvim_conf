@@ -15,7 +15,7 @@ require("mason-lspconfig").setup({
 		"lua_ls",
 		"tsserver",
 		"astro",
-		"intelephense",
+		"phpactor",
 	},
 })
 
@@ -75,7 +75,7 @@ lspconfig.tsserver.setup({
 	capabilities = capabilities,
 	on_attach = on_attach,
 })
-lspconfig.intelephense.setup({ capabilities = capabilities, filetypes = { "php", "blade" }, on_attach = on_attach })
+lspconfig.phpactor.setup({ capabilities = capabilities, filetypes = { "php", "blade" }, on_attach = on_attach })
 lspconfig.emmet_ls.setup({
 	capabilities = capabilities,
 	filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "blade" },

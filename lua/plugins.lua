@@ -126,13 +126,20 @@ return packer.startup(function()
 	use({
 		"kyazdani42/nvim-tree.lua",
 		cmd = "NvimTreeToggle",
-		requires = "kyazdani42/nvim-web-devicons",
+		requires = "nvim-tree/nvim-web-devicons",
 		config = "require('config.nvim-tree')",
 	})
 
 	use({
+		"akinsho/bufferline.nvim",
+		tag = "*",
+		requires = "nvim-tree/nvim-web-devicons",
+		config = "require('config.nvim-bufferline')",
+	})
+
+	use({
 		"nvim-lualine/lualine.nvim",
-		requires = { "kyazdani42/nvim-web-devicons", opt = true },
+		requires = { "nvim-tree/nvim-web-devicons", opt = true },
 		config = "require('config.lua-line')",
 	})
 

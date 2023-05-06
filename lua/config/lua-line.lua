@@ -19,6 +19,15 @@ local function lsp_status()
 	return msg
 end
 
+local function database_status()
+	local msg = "No Active Database"
+	local db_ui = vim.fn["db_ui#statusline"]({ show = { "db_name", "schema", "table" }, separator = "  " })
+	if db_ui == "" then
+		db_ui = msg
+	end
+	return db_ui
+end
+
 ll.setup({
 	options = {
 		icons_enabled = true,
@@ -53,6 +62,10 @@ ll.setup({
 			},
 		},
 		lualine_x = {
+			{
+				database_status,
+				icon = " ",
+			},
 			{
 				lsp_status,
 				icon = " ",

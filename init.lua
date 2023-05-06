@@ -57,6 +57,7 @@ require("keymaps")
 -- Plugins Settings
 g.floaterm_keymap_toggle = "<F10>"
 g.floaterm_borderchars = "─│─│╭╮╯╰"
+g.floaterm_position = "bottomright"
 g.matchup_matchparen_offscreen = { method = "popup" }
 g.floaterm_width = 0.8
 g.floaterm_height = 0.8
