@@ -30,6 +30,7 @@ require("formatter").setup({
 		},
 		go = {
 			require("formatter.filetypes.go").gofmt,
+			require("formatter.filetypes.go").goimports,
 		},
 		rust = {
 			require("formatter.filetypes.rust").rustfmt,

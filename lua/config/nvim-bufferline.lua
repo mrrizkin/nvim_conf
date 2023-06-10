@@ -14,9 +14,6 @@ local opts = {
 		end
 		return s
 	end,
-	indicator = {
-		style = "underline",
-	},
 	offsets = {
 		{
 			filetype = "NvimTree",

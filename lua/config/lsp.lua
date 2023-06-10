@@ -16,10 +16,11 @@ require("mason-lspconfig").setup({
 		"tsserver",
 		"astro",
 		"phpactor",
+		"eslint",
 	},
 })
 
-local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
 for type, icon in pairs(signs) do
 	local hl = "DiagnosticSign" .. type
 	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
@@ -82,7 +83,48 @@ lspconfig.emmet_ls.setup({
 	on_attach = on_attach,
 })
 lspconfig.html.setup({ capabilities = capabilities, on_attach = on_attach })
-lspconfig.gopls.setup({ capabilities = capabilities, on_attach = on_attach })
-lspconfig.rust_analyzer.setup({ capabilities = capabilities, on_attach = on_attach })
+
+lspconfig.gopls.setup({
+	capabilities = capabilities,
+	on_attach = on_attach,
+	cmd = { "gopls" },
+	root_dir = lspconfig.util.root_pattern("go.mod", "go.work", ".git"),
+	settings = {
+		gopls = {
+			completeUnimported = true,
+			usePlaceholders = true,
+			staticcheck = true,
+			analyses = {
+				unusedparams = true,
+			},
+		},
+	},
+})
+
+lspconfig.rust_analyzer.setup({
+	capabilities = capabilities,
+	on_attach = on_attach,
+	filetypes = { "rust" },
+	root_dir = lspconfig.util.root_pattern("Cargo.toml"),
+	settings = {
+		["rust-analyzer"] = {
+			cargo = {
+				allFeatures = true,
+			},
+		},
+	},
+})
+
 lspconfig.pyright.setup({ capabilities = capabilities, on_attach = on_attach })
 lspconfig.astro.setup({ capabilities = capabilities, on_attach = on_attach })
+lspconfig.eslint.setup({ capabilities = capabilities, on_attach = on_attach })
+lspconfig.dartls.setup({
+	capabilities = capabilities,
+	on_attach = on_attach,
+	init_options = {
+		closingLabels = true,
+		flutterOutline = true,
+		completeFunctionCalls = true,
+		lint = true,
+	},
+})

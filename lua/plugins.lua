@@ -160,6 +160,12 @@ return packer.startup(function()
 	})
 
 	use({
+		"catppuccin/nvim",
+		as = "catppuccin",
+		config = "require('config.nvim-catppuccin')",
+	})
+
+	use({
 		"kristijanhusak/vim-dadbod-ui",
 		requires = "tpope/vim-dadbod",
 		config = "require('config.nvim-dadbod')",
