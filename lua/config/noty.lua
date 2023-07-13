@@ -5,7 +5,7 @@ vim.notify.setup({
 	background_colour = colors.bg,
 	fps = 24,
 	render = "default",
-	top_down = false,
+	top_down = true,
 })
 -- Utility functions shared between progress reports for LSP and DAP
 

@@ -90,6 +90,24 @@ return packer.startup(function()
 		config = "require('config.nvim-copilot')",
 	})
 
+	use({
+		"akinsho/flutter-tools.nvim",
+		requires = {
+			"nvim-lua/plenary.nvim",
+			"stevearc/dressing.nvim", -- optional for vim.ui.select
+		},
+		config = "require('config.nvim-flutter')",
+	})
+	
+	-- sourcegraph
+	use({
+		"sourcegraph/sg.nvim",
+		run = "cargo build --workspace",
+		requires = {
+			"nvim-lua/plenary.nvim",
+		},
+	})
+
 	-- completion
 	use({
 		"hrsh7th/nvim-cmp",

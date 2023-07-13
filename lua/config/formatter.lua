@@ -13,6 +13,12 @@ require("formatter").setup({
 		css = {
 			require("formatter.filetypes.javascript").prettierd,
 		},
+		scss = {
+			require("formatter.filetypes.javascript").prettierd,
+		},
+		sass = {
+			require("formatter.filetypes.javascript").prettierd,
+		},
 		json = {
 			require("formatter.filetypes.javascript").prettierd,
 		},
@@ -34,6 +40,9 @@ require("formatter").setup({
 		},
 		rust = {
 			require("formatter.filetypes.rust").rustfmt,
+		},
+		dart = {
+			require("formatter.filetypes.dart").dartformat,
 		},
 	},
 })

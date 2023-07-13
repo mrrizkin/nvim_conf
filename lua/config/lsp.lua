@@ -118,13 +118,8 @@ lspconfig.rust_analyzer.setup({
 lspconfig.pyright.setup({ capabilities = capabilities, on_attach = on_attach })
 lspconfig.astro.setup({ capabilities = capabilities, on_attach = on_attach })
 lspconfig.eslint.setup({ capabilities = capabilities, on_attach = on_attach })
-lspconfig.dartls.setup({
+
+require("sg").setup({
 	capabilities = capabilities,
 	on_attach = on_attach,
-	init_options = {
-		closingLabels = true,
-		flutterOutline = true,
-		completeFunctionCalls = true,
-		lint = true,
-	},
 })
