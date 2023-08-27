@@ -30,13 +30,26 @@ require("catppuccin").setup({
 		operators = {},
 	},
 	color_overrides = {},
-	custom_highlights = {},
+	custom_highlights = function(colors)
+		return {
+			CopilotSuggestion = { fg = colors.overlay1, bg = colors.surface0, style = { "italic" } },
+		}
+	end,
 	integrations = {
+		native_lsp = {
+			enabled = true,
+			underlines = {
+				errors = { "undercurl" },
+				hints = { "undercurl" },
+				warnings = { "undercurl" },
+				information = { "undercurl" },
+			},
+		},
 		cmp = true,
 		gitsigns = true,
 		nvimtree = true,
 		telescope = true,
-		notify = false,
+		notify = true,
 		navic = {
 			enabled = true,
 			custom_bg = "NONE",

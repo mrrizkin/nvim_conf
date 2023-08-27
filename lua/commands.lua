@@ -30,7 +30,3 @@ cmd([[cnoreabbrev Qall qall]])
 
 local format_auto_group = augroup("FormatAutogroup", { clear = true })
 autocmd("BufWritePost", { pattern = "*", command = "silent! FormatWrite", group = format_auto_group })
-
-local trim_trailing_white_space = augroup("TrimTrailingWhiteSpace", { clear = true })
-autocmd("BufWritePre", { pattern = "*", command = [[%s/\s\+$//e]], group = trim_trailing_white_space })
-autocmd("BufWritePre", { pattern = "*", command = [[%s/\n\+\%$//e]], group = trim_trailing_white_space })

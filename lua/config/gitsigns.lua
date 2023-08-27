@@ -29,7 +29,7 @@ gutter.setup({
 		delay = 1000,
 		ignore_whitespace = false,
 	},
-	current_line_blame_formatter = "<author>, <author_time:%Y-%m-%d> - <summary>",
+	current_line_blame_formatter = "<author>, <author_time:%A, %d %b %Y> - <summary>",
 	sign_priority = 6,
 	update_debounce = 100,
 	status_formatter = nil, -- Use default

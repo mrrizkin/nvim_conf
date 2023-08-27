@@ -10,7 +10,7 @@ telescope.setup({
 	defaults = {
 		file_sorter = sorters.get_fzy_sorter,
 		prompt_prefix = "   ",
-		selection_caret = "  ",
+		selection_caret = "  ",
 		entry_prefix = "  ",
 		layout_config = {
 			prompt_position = "top",
@@ -26,15 +26,15 @@ telescope.setup({
 	pickers = {
 		live_grep = {
 			layout_config = {
-				width = 0.9,
-				height = 0.9,
+				width = 0.7,
+				height = 0.7,
 			},
 			preview = true,
 		},
 		find_files = {
 			layout_config = {
-				width = 0.9,
-				height = 0.9,
+				width = 0.6,
+				height = 0.7,
 			},
 			preview = true,
 		},

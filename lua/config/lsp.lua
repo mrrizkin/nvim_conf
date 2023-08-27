@@ -45,10 +45,12 @@ local on_attach = function(client, bufnr)
 		navic.attach(client, bufnr)
 	end
 	require("lsp_signature").on_attach({
-		doc_lines = 0,
-		floating_window = false,
+		-- doc_lines = 0,
+		-- floating_window = false,
+		bind = true, -- This is mandatory, otherwise border config won't get registered.
+		hint_enable = false,
 		handler_opts = {
-			border = "none",
+			border = "rounded",
 		},
 	})
 end
@@ -118,8 +120,3 @@ lspconfig.rust_analyzer.setup({
 lspconfig.pyright.setup({ capabilities = capabilities, on_attach = on_attach })
 lspconfig.astro.setup({ capabilities = capabilities, on_attach = on_attach })
 lspconfig.eslint.setup({ capabilities = capabilities, on_attach = on_attach })
-
-require("sg").setup({
-	capabilities = capabilities,
-	on_attach = on_attach,
-})

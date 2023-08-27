@@ -1,8 +1,7 @@
 vim.notify = require("notify")
-local colors = require("onenord.colors").load()
 
 vim.notify.setup({
-	background_colour = colors.bg,
+	background_colour = "#1e222a",
 	fps = 24,
 	render = "default",
 	top_down = true,
@@ -23,7 +22,7 @@ local function get_notif_data(client_id, token)
 	return client_notifs[client_id][token]
 end
 
-local spinner_frames = { "⣾", "⣽", "⣻", "⢿", "⡿", "⣟", "⣯", "⣷" }
+local spinner_frames = { "-", "≻", "›", "⟩", "›", "≻", "-" }
 
 local function update_spinner(client_id, token)
 	local notif_data = get_notif_data(client_id, token)

@@ -59,12 +59,6 @@ return packer.startup(function()
 		config = "require('config.treesitter')",
 	})
 
-	use({ -- deprecated
-		"SmiteshP/nvim-gps",
-		requires = "nvim-treesitter/nvim-treesitter",
-		config = "require('config.nvim-gpsconfig')",
-	})
-
 	use({
 		"SmiteshP/nvim-navic",
 		requires = "neovim/nvim-lspconfig",
@@ -97,15 +91,6 @@ return packer.startup(function()
 			"stevearc/dressing.nvim", -- optional for vim.ui.select
 		},
 		config = "require('config.nvim-flutter')",
-	})
-	
-	-- sourcegraph
-	use({
-		"sourcegraph/sg.nvim",
-		run = "cargo build --workspace",
-		requires = {
-			"nvim-lua/plenary.nvim",
-		},
 	})
 
 	-- completion
@@ -149,13 +134,6 @@ return packer.startup(function()
 	})
 
 	use({
-		"akinsho/bufferline.nvim",
-		tag = "*",
-		requires = "nvim-tree/nvim-web-devicons",
-		config = "require('config.nvim-bufferline')",
-	})
-
-	use({
 		"nvim-lualine/lualine.nvim",
 		requires = { "nvim-tree/nvim-web-devicons", opt = true },
 		config = "require('config.lua-line')",
@@ -165,16 +143,6 @@ return packer.startup(function()
 	use({
 		"windwp/nvim-autopairs",
 		config = "require('nvim-autopairs').setup()",
-	})
-
-	use({
-		"olivercederborg/poimandres.nvim",
-		config = "require('config.nvim-poimandres')",
-	})
-
-	use({
-		"rmehri01/onenord.nvim",
-		config = "require('config.nvim-onenord')",
 	})
 
 	use({

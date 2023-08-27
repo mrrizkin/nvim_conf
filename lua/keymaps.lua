@@ -76,32 +76,6 @@ vmap(">", ">gv")
 
 -- Leader key map
 wkey.register({
-	z = {
-		name = "Zettlekasten",
-		f = { "<cmd>Telekasten find_notes<cr>", "Find notes" },
-		d = { "<cmd>Telekasten find_daily_notes<cr>", "Find daily notes" },
-		g = { "<cmd>Telekasten search_notes<cr>", "Search notes" },
-		z = { "<cmd>Telekasten follow_link<cr>", "Follow link" },
-		T = { "<cmd>Telekasten goto_today<cr>", "Goto today" },
-		W = { "<cmd>Telekasten goto_thisweek<cr>", "Goto this week" },
-		w = { "<cmd>Telekasten find_weekly_notes<cr>", "Find weekly notes" },
-		n = { "<cmd>Telekasten new_note<cr>", "New note" },
-		N = { "<cmd>Telekasten new_templated_note<cr>", "New templated note" },
-		y = { "<cmd>Telekasten yank_notelink<cr>", "Yank notelink" },
-		c = { "<cmd>Telekasten show_calendar<cr>", "Show calendar" },
-		C = { "<cmd>CalendarT<cr>", "Show calendar" },
-		i = { "<cmd>Telekasten paste_img_and_link<cr>", "Paste img and link" },
-		t = { "<cmd>Telekasten toggle_todo<cr>", "Toggle todo" },
-		b = { "<cmd>Telekasten show_backlinks<cr>", "Show backlinks" },
-		F = { "<cmd>Telekasten find_friends<cr>", "Find friends" },
-		I = { "<cmd>Telekasten insert_img_link({ i=true })<cr>", "Insert img link" },
-		p = { "<cmd>Telekasten preview_img<cr>", "Preview img" },
-		m = { "<cmd>Telekasten browse_media<cr>", "Browse media" },
-		a = { "<cmd>Telekasten show_tags<cr>", "Show tags" },
-		["#"] = { "<cmd>Telekasten show_tags<cr>", "Show tags" },
-		r = { "<cmd>Telekasten rename_note<cr>", "Rename note" },
-		["."] = { "<cmd>Telekasten panel<cr>", "Panel" },
-	},
 	t = {
 		name = "Terminal",
 		f = { "<cmd>FloatermNew --width=0.6 --height=0.6 --title=\\ File\\ Manager\\  lf<cr>", "File Manager" },

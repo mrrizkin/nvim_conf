@@ -4,8 +4,8 @@ local map = utils.map
 
 -- leader/local leader
 map("", "<Space>", "<Nop>", { silent = true })
-g.mapleader = [[ ]]
-g.maplocalleader = [[,]]
+g.mapleader = " "
+g.maplocalleader = ","
 
 -- skip some remote provider loading
 g.loaded_python_provider = 0
@@ -58,6 +58,6 @@ require("keymaps")
 g.floaterm_keymap_toggle = "<F10>"
 g.floaterm_borderchars = "─│─│╭╮╯╰"
 g.floaterm_position = "bottomright"
+g.floaterm_width = 0.9
+g.floaterm_height = 0.9
 g.matchup_matchparen_offscreen = { method = "popup" }
-g.floaterm_width = 0.8
-g.floaterm_height = 0.8

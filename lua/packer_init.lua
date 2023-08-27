@@ -12,7 +12,7 @@ if not present then
 		"clone",
 		"https://github.com/wbthomason/packer.nvim",
 		"--depth",
-		"20",
+		"10",
 		packer_path,
 	})
 

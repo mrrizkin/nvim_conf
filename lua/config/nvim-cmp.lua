@@ -20,6 +20,10 @@ cmp.setup({
 		["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior }),
 		["<cr>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 	},
+	window = {
+		completion = cmp.config.window.bordered(),
+		documentation = cmp.config.window.bordered(),
+	},
 	sources = cmp.config.sources({
 		{ name = "nvim_lua" },
 		{ name = "luasnip" },
@@ -40,18 +44,8 @@ cmp.setup({
 				path = "[path]",
 				luasnip = "[snip]",
 			},
-			-- before = function(entry, vim_item)
-			-- 	vim_item.kind = lspkind.presets.default[vim_item.kind]
-			-- 	if entry.source.name == "copilot" then
-			-- 		vim_item.kind = ""
-			-- 	end
-			-- 	return vim_item
-			-- end,
 		}),
 	},
-	-- experimental = {
-	-- 	ghost_text = true,
-	-- },
 })
 
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
