@@ -11,7 +11,7 @@ telescope.setup({
 		file_sorter = sorters.get_fzy_sorter,
 		prompt_prefix = "   ",
 		selection_caret = "  ",
-		entry_prefix = "  ",
+		entry_prefix = "   ",
 		layout_config = {
 			prompt_position = "top",
 			width = 0.4,

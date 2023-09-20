@@ -113,6 +113,14 @@ return packer.startup(function()
 		config = "require('config.lua-snip')",
 	})
 
+	use({
+		"olexsmir/gopher.nvim",
+		requires = { -- dependencies
+			"nvim-lua/plenary.nvim",
+			"nvim-treesitter/nvim-treesitter",
+		},
+	})
+
 	-- gitsign
 	use({
 		"lewis6991/gitsigns.nvim",

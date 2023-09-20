@@ -34,6 +34,8 @@ nmap("]d", "<cmd>lua vim.diagnostic.goto_next()<cr>")
 
 nmap("<c-s>", "<cmd>w<cr>")
 nmap("<c-p>", "<cmd>Telescope find_files<cr>")
+nmap("<c-c>", "<cmd>Telescope commands<cr>")
+nmap("<c-t>", "<cmd>Telescope<cr>")
 nmap("<a-b>", "<cmd>Telescope buffers<cr>")
 nmap("<a-d>", "<cmd>DBUIToggle<cr>")
 -- nmap("<a-r>", "<cmd>Reload<cr>")

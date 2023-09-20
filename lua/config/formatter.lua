@@ -40,6 +40,7 @@ require("formatter").setup({
 		go = {
 			require("formatter.filetypes.go").gofmt,
 			require("formatter.filetypes.go").goimports,
+			require("formatter.filetypes.go").golines,
 		},
 		sh = {
 			require("formatter.filetypes.sh").shfmt,

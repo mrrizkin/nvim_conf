@@ -81,7 +81,7 @@ lspconfig.tsserver.setup({
 lspconfig.phpactor.setup({ capabilities = capabilities, filetypes = { "php", "blade" }, on_attach = on_attach })
 lspconfig.emmet_ls.setup({
 	capabilities = capabilities,
-	filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "blade" },
+	filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "blade", "handlebars" },
 	on_attach = on_attach,
 })
 lspconfig.html.setup({ capabilities = capabilities, on_attach = on_attach })
@@ -90,6 +90,7 @@ lspconfig.gopls.setup({
 	capabilities = capabilities,
 	on_attach = on_attach,
 	cmd = { "gopls" },
+	filetypes = { "go", "gomod", "gowork", "gotmpl" },
 	root_dir = lspconfig.util.root_pattern("go.mod", "go.work", ".git"),
 	settings = {
 		gopls = {
