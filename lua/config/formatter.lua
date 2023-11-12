@@ -51,6 +51,18 @@ require("formatter").setup({
 		toml = {
 			require("formatter.filetypes.toml").taplo,
 		},
+		blade = {
+			function()
+				return {
+					exe = "blade-formatter",
+					args = { vim.api.nvim_buf_get_name(0) },
+					stdin = true,
+				}
+			end,
+		},
+		php = {
+			require("formatter.filetypes.php").php_cs_fixer,
+		},
 		rust = {
 			require("formatter.filetypes.rust").rustfmt,
 		},

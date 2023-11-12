@@ -1,10 +1,10 @@
 local lspconfig = require("lspconfig")
 local cmp = require("cmp_nvim_lsp")
 local navic = require("nvim-navic")
+local utils = require("utils")
 
+-- Mason settings
 require("mason").setup()
-
--- NOTE: tsserver error when using nvim-lsp-installer
 require("mason-lspconfig").setup({
 	ensure_installed = {
 		"emmet_ls",
@@ -20,24 +20,7 @@ require("mason-lspconfig").setup({
 	},
 })
 
-local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
-for type, icon in pairs(signs) do
-	local hl = "DiagnosticSign" .. type
-	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-end
-
-vim.diagnostic.config({
-	underline = true,
-	-- virtual_text = true,
-	float = {
-		show_header = true,
-		source = "if_many",
-		border = "rounded",
-		focusable = false,
-	},
-	-- signs = true,
-})
-
+-- LSP settings
 local capabilities = cmp.default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 local on_attach = function(client, bufnr)
@@ -45,15 +28,26 @@ local on_attach = function(client, bufnr)
 		navic.attach(client, bufnr)
 	end
 	require("lsp_signature").on_attach({
-		-- doc_lines = 0,
-		-- floating_window = false,
-		bind = true, -- This is mandatory, otherwise border config won't get registered.
+		bind = true,
 		hint_enable = false,
 		handler_opts = {
 			border = "rounded",
 		},
 	})
 end
+
+utils.autoload_lsp(lspconfig, {
+	"pyright",
+	"astro",
+	"eslint",
+	"html",
+	"emmet_ls",
+	"phpactor",
+	"tsserver",
+}, {
+	capabilities = capabilities,
+	on_attach = on_attach,
+})
 
 lspconfig.lua_ls.setup({
 	settings = {
@@ -62,10 +56,10 @@ lspconfig.lua_ls.setup({
 				globals = { "vim" },
 			},
 			workspace = {
-				-- Make the server aware of Neovim runtime files
 				library = {
 					[vim.fn.expand("$VIMRUNTIME/lua")] = true,
 					[vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+					[vim.fn.stdpath("data") .. "/lazy"] = true,
 				},
 			},
 		},
@@ -73,18 +67,6 @@ lspconfig.lua_ls.setup({
 	capabilities = capabilities,
 	on_attach = on_attach,
 })
-
-lspconfig.tsserver.setup({
-	capabilities = capabilities,
-	on_attach = on_attach,
-})
-lspconfig.phpactor.setup({ capabilities = capabilities, filetypes = { "php", "blade" }, on_attach = on_attach })
-lspconfig.emmet_ls.setup({
-	capabilities = capabilities,
-	filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "blade", "handlebars" },
-	on_attach = on_attach,
-})
-lspconfig.html.setup({ capabilities = capabilities, on_attach = on_attach })
 
 lspconfig.gopls.setup({
 	capabilities = capabilities,
@@ -118,6 +100,20 @@ lspconfig.rust_analyzer.setup({
 	},
 })
 
-lspconfig.pyright.setup({ capabilities = capabilities, on_attach = on_attach })
-lspconfig.astro.setup({ capabilities = capabilities, on_attach = on_attach })
-lspconfig.eslint.setup({ capabilities = capabilities, on_attach = on_attach })
+-- Diagnostics settings
+utils.set_diagnostic_sign({
+	Error = " ",
+	Warn = " ",
+	Hint = " ",
+	Info = " ",
+})
+
+vim.diagnostic.config({
+	underline = true,
+	float = {
+		show_header = true,
+		source = "if_many",
+		border = "rounded",
+		focusable = false,
+	},
+})

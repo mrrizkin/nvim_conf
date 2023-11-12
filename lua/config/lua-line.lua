@@ -1,10 +1,8 @@
 local ll = require("lualine")
--- local gps = require("nvim-gps")
 local navic = require("nvim-navic")
 
 local function lsp_status()
-	-- Lsp server name .
-	local msg = "No Active LSP"
+	local msg = ""
 	local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
 	local clients = vim.lsp.get_active_clients()
 	if next(clients) == nil then
@@ -20,12 +18,7 @@ local function lsp_status()
 end
 
 local function database_status()
-	local msg = "No Active Database"
-	local db_ui = vim.fn["db_ui#statusline"]({ show = { "db_name", "schema", "table" }, separator = "  " })
-	if db_ui == "" then
-		db_ui = msg
-	end
-	return db_ui
+	return vim.fn["db_ui#statusline"]({ show = { "db_name", "schema", "table" }, separator = "  " })
 end
 
 ll.setup({
@@ -63,16 +56,31 @@ ll.setup({
 		},
 		lualine_x = {
 			{
-				database_status,
-				icon = " ",
+				"lsp_progress",
+				separators = {
+					component = " ",
+					progress = " | ",
+					percentage = { pre = "", post = "%% " },
+					title = { pre = "", post = ": " },
+					lsp_client_name = { pre = "[", post = "]" },
+					spinner = { pre = "", post = "" },
+					message = { commenced = "In Progress", completed = "Completed" },
+				},
+				display_components = { "lsp_client_name", "spinner", { "title", "percentage", "message" } },
+				timer = { progress_enddelay = 500, spinner = 1000, lsp_client_name_enddelay = 1000 },
+				spinner_symbols = { "🌑 ", "🌒 ", "🌓 ", "🌔 ", "🌕 ", "🌖 ", "🌗 ", "🌘 " },
 			},
 			{
 				lsp_status,
 				icon = " ",
 			},
+			{
+				database_status,
+				icon = " ",
+			},
 			"filetype",
 		},
-		lualine_y = { "encoding", "fileformat", "progress" },
+		lualine_y = { "encoding", "fileformat" },
 		lualine_z = { "location" },
 	},
 	inactive_sections = {

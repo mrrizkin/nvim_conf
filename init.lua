@@ -1,27 +1,24 @@
-local g = vim.g
 local utils = require("utils")
 local map = utils.map
+local set = utils.set
 
 -- leader/local leader
 map("", "<Space>", "<Nop>", { silent = true })
-g.mapleader = " "
-g.maplocalleader = ","
+set("mapleader", " ")
+set("maplocalleader", ",")
 
 -- skip some remote provider loading
-g.loaded_python_provider = 0
-g.loaded_perl_provider = 0
-g.python_host_prog = "/usr/bin/python2"
-g.python3_host_prog = "/usr/bin/python"
+set("loaded_python_provider", 0)
+set("loaded_ruby_provider", 0)
+set("loaded_perl_provider", 0)
+set("python_host_prog", "/usr/bin/python2")
+set("python3_host_prog", "/usr/bin/python")
 
--- uncomment if you don't use nvm
--- g.node_host_prog = "~/.local/npm/bin/neovim-node-host"
-
--- uncomment if you use nvm
-local node_version = vim.fn.system("node --version")
-g.node_host_prog = "~/.nvm/versions/node/" .. node_version .. "/bin/neovim-node-host"
+-- set to false if you don't use nvm
+utils.node_neovim_host(true)
 
 -- disable built-in plugins
-local disabled_built_ins = {
+utils.disable_builtins({
 	"2html_plugin",
 	"getscript",
 	"getscriptPlugin",
@@ -44,20 +41,18 @@ local disabled_built_ins = {
 	"vimballPlugin",
 	"zip",
 	"zipPlugin",
-}
-for _, plugin in pairs(disabled_built_ins) do
-	g["loaded_" .. plugin] = 1
-end
+})
 
 -- Settings
+require("lazy_init")
 require("settings")
 require("commands")
 require("keymaps")
 
 -- Plugins Settings
-g.floaterm_keymap_toggle = "<F10>"
-g.floaterm_borderchars = "─│─│╭╮╯╰"
-g.floaterm_position = "bottomright"
-g.floaterm_width = 0.9
-g.floaterm_height = 0.9
-g.matchup_matchparen_offscreen = { method = "popup" }
+set("floaterm_keymap_toggle", "<F10>")
+set("floaterm_borderchars", "─│─│╭╮╯╰")
+set("floaterm_position", "bottomright")
+set("floaterm_width", 0.9)
+set("floaterm_height", 0.9)
+set("matchup_matchparen_offscreen", { method = "popup" })
