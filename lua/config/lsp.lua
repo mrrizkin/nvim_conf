@@ -44,6 +44,10 @@ utils.autoload_lsp(lspconfig, {
 	"emmet_ls",
 	"phpactor",
 	"tsserver",
+"arduino_language_server",
+"dockerls",
+"docker_compose_language_service",
+"dockerls",
 }, {
 	capabilities = capabilities,
 	on_attach = on_attach,
