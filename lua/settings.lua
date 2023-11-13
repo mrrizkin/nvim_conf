@@ -4,7 +4,6 @@ local o, wo, bo = vim.o, vim.wo, vim.bo
 local buffer = { o, bo }
 local window = { o, wo }
 
--- opt("guicursor", true)
 opt("mouse", "nivh")
 opt("background", "dark")
 opt("undofile", true, buffer)
@@ -41,7 +40,7 @@ opt("backup", false)
 opt("writebackup", false)
 opt("termguicolors", true)
 opt("updatetime", 50)
-opt("scrolloff", 8)
+opt("scrolloff", 4)
 opt("list", false, window)
 opt("listchars", "eol:¬,tab:▏ ,trail:~,extends:>,precedes:<,nbsp:␣")
 opt("modeline", false, buffer)

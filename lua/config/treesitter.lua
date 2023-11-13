@@ -30,7 +30,7 @@ ts_config.setup({
 		"astro",
 		"blade",
 	},
-	sync_install = false,
+	sync_install = true,
 	auto_install = true,
 	highlight = {
 		enable = true,
